@@ -3,17 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 import {AuthConfig} from 'angular-oauth2-oidc';
+import {HttpHeaders} from '@angular/common/http';
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:8080',
+  httpOptions: {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  },
   authConfig: new AuthConfig({
     issuer: 'http://localhost:8081/auth/realms/Projecty',
     redirectUri: window.location.origin,
     clientId: 'sso-client',
     responseType: 'code',
-    scope: 'openid profile email offline_access',
+    scope: 'profile email offline_access',
     showDebugInformation: true,
-    requireHttps: false
+    requireHttps: false,
   })
 };
 
