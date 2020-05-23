@@ -1,8 +1,7 @@
 import {ProjectRole} from './ProjectRole';
 
-export class Project {
+export class User {
   id: number;
-  name: string;
-//  tasks
+  username: string;
   projectRoles: ProjectRole[];
 }

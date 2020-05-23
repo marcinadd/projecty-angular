@@ -6,13 +6,15 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {HttpClientModule} from '@angular/common/http';
-import {ProjectsComponent} from './components/projects/projects.component';
+import {ProjectsComponent} from './components/project/projects/projects.component';
+import {HeaderComponent} from './layout/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
