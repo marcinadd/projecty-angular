@@ -8,13 +8,18 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 import {HttpClientModule} from '@angular/common/http';
 import {ProjectsComponent} from './components/project/projects/projects.component';
 import {HeaderComponent} from './layout/header/header.component';
+import {AddProjectComponent} from './components/project/add-project/add-project.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProjectsComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddProjectComponent,
+    ManageProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,9 @@ import {HeaderComponent} from './layout/header/header.component';
         allowedUrls: ['http://localhost:8080']
       }
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

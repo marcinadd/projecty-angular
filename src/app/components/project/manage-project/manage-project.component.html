@@ -1,0 +1,65 @@
+<div class="container">
+  <h2 class="text-center">Manage project</h2>
+  <h3>Change project name</h3>
+  <form (ngSubmit)="onChangeName()" class="my-2">
+    <div class="form-group">
+      <label for="newName">New Name:</label>
+      <input [(ngModel)]="newName" [placeholder]="project.name" class="form-control" id="newName" name="name"
+             type="text">
+    </div>
+    <button class="btn btn-success">Change name</button>
+  </form>
+  <ng-container *ngIf="project.team === null">
+    <div class="pt-3">
+      <h3>Manage users</h3>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Role name</th>
+        <th scope="col">Remove</th>
+        <th scope="col">Change project role</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let projectRole of projectRoles">
+      <tr>
+        <td>{{projectRole.user.username}}</td>
+        <td>{{projectRole.name}}</td>
+        <td>
+          <button *ngIf="projectRole.user.id === currentUser.id" class="btn btn-danger disabled">
+            Remove
+          </button>
+          <button *ngIf="projectRole.user.id !== currentUser.id" class="btn btn-danger" type="submit">Remove</button>
+        </td>
+        <td>
+          <button *ngIf="projectRole.name === 'ADMIN' && projectRole.user.id !== currentUser.id" class="btn btn-success"
+                  type="submit">
+            Disable Admin
+          </button>
+          <button *ngIf="projectRole.name === 'USER' && projectRole.user.id !== currentUser.id" class="btn btn-danger"
+                  type="submit">
+            Enable Admin
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h3>Add users</h3>
+    <form (ngSubmit)="onAddUsers()">
+      <!--      TODO Add users here-->
+      <div class="form-actions">
+        <button class="btn btn-success" type="submit">Add users</button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-container *ngIf="project.team !== null">
+    <div class="alert alert-primary my-4" role="alert">
+      This project is visible for all members of team <u>{{project.team.name}}</u>. <br>
+      All team members have access to project corresponding to their roles.<br>
+      You can't set them separately.
+    </div>
+  </ng-container>
+  <h3>Delete project</h3>
+  <button class="btn btn-danger" type="submit">Delete project</button>
+</div>

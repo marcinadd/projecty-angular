@@ -1,5 +1,6 @@
 <div class="container">
   <div class="container my-3">
+    <!--    TODO TeamRoles view here-->
     <h3>Projects</h3>
     <ul>
       <li *ngFor="let projectRole of projectRoles" class="list-group-item my-2">
@@ -34,9 +35,11 @@
               <button class="btn btn-success" id="addTaskButton" type="button">Add task</button>
             </div>
             <div class="p-2">
-              <button class="btn btn-warning" id="manageProjectButton" type="button">Manage
-                project
-              </button>
+              <a [routerLink]="['/projects/',projectRole.project.id]">
+                <button class="btn btn-warning" id="manageProjectButton" type="button">Manage
+                  project
+                </button>
+              </a>
             </div>
             <div class="p-2">
               <button class="btn btn-danger" type="submit">Leave project</button>
