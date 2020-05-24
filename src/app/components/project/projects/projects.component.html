@@ -28,11 +28,13 @@
         </div>
         <div class="d-flex justify-content-around">
           <div class="p-2">
-            <button class="btn btn-primary" id="tasksListButton" type="button">Task list</button>
+            <a [routerLink]="['/projects/',projectRole.project.id,'tasks']">
+              <button class="btn btn-primary" id="tasksListButton" type="button">Task list</button>
+            </a>
           </div>
           <ng-container *ngIf="projectRole.name === 'ADMIN'">
             <div class="p-2">
-              <a [routerLink]="['/projects/',projectRole.project.id,'tasks/add']">
+              <a [routerLink]="['/projects/',projectRole.project.id,'tasks','add']">
                 <button class="btn btn-success" id="addTaskButton" type="button">Add task</button>
               </a>
             </div>

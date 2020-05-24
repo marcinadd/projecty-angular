@@ -18,6 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {TasksComponent} from './components/task/tasks/tasks.component';
+import {TaskInfoComponent} from './components/task/tasks/task-info/task-info.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     HeaderComponent,
     AddProjectComponent,
     ManageProjectComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    TasksComponent,
+    TaskInfoComponent
   ],
   imports: [
     BrowserModule,

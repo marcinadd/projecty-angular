@@ -1,0 +1,110 @@
+<div>
+  <h1> Tasks for project: <b>{{projectTasksData.project.name}}</b></h1>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">To do</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of projectTasksData.toDoTasks">
+            <td>
+              <div class="container p-3">
+                <app-task-info [hasPermissionToEdit]="projectTasksData.hasPermissionToEdit"
+                               [task]="task"></app-task-info>
+                <div *ngIf="getDateDifferenceInDays(currentDate,task.startDate)>=0; else toDoDelayElse"
+                     class="row text-center text-success">
+                  <p>Days to start: </p>
+                  <p class="text-center">{{getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                </div>
+                <ng-template #toDoDelayElse>
+                  <div class="row text-center text-danger" v-else>
+                    <p>Delay (days): </p>
+                    <p class="text-center">{{-getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                  </div>
+                </ng-template>
+                <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" class="btn btn-info">&gt;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">In progress</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of projectTasksData.inProgressTasks">
+            <td>
+              <div class="container p-3">
+                <app-task-info [hasPermissionToEdit]="projectTasksData.hasPermissionToEdit"
+                               [task]="task"></app-task-info>
+                <div *ngIf="getDateDifferenceInDays(currentDate,task.startDate)>=0; else inProgressDelayElse"
+                     class="row text-center text-success">
+                  <p>Days to end: </p>
+                  <p class="text-center">{{getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                </div>
+                <ng-template #inProgressDelayElse>
+                  <div class="row text-center text-danger">
+                    <p>Delay (days): </p>
+                    <p class="text-center">{{-getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                  </div>
+                </ng-template>
+                <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onStatusChange(task,taskStatuses.TO_DO)" class="btn btn-info">&lt;</button>
+                    </div>
+                    <div class="col">
+                      <button (click)="onStatusChange(task,taskStatuses.DONE)" class="btn btn-info">&gt;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Done</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of projectTasksData.doneTasks">
+            <td>
+              <div class="container p-3">
+                <app-task-info [hasPermissionToEdit]="projectTasksData.hasPermissionToEdit"
+                               [task]="task"></app-task-info>
+                <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" class="btn btn-info">&lt;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

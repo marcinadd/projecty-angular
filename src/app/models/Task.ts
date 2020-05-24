@@ -5,9 +5,9 @@ import {User} from './User';
 export class Task {
   id: number;
   name: string;
-  startDate: string;
-  endDate: string;
-  taskStatus: TaskStatus;
+  startDate: Date;
+  endDate: Date;
+  status: TaskStatus;
   project: Project;
   assignedUsers: User[];
 }

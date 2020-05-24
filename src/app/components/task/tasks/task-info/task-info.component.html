@@ -1,0 +1,15 @@
+<div>
+  <div *ngIf="hasPermissionToEdit; else elseBlock">
+    <!--    TODO Link to Manage Task here-->
+    <a [routerLink]="['/tasks',task.id]">
+      <div class="row text-center">{{task.name}}</div>
+    </a>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+      <div class="row text-center">{{task.name}}</div>
+    </div>
+  </ng-template>
+  <div class="row text-center">{{task.startDate}}</div>
+  <div class="row text-center">{{task.endDate}}</div>
+</div>
