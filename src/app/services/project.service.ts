@@ -29,5 +29,7 @@ export class ProjectService {
     return this.http.patch<Project>(this.apiProjectsUrl + '/' + projectId, patchedProject, environment.httpOptions);
   }
 
-
+  getProjectData(projectId: number): Observable<Project> {
+    return this.http.get<Project>(this.apiProjectsUrl + '/' + projectId);
+  }
 }

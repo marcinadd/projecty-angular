@@ -1,0 +1,31 @@
+<div>
+  <p>Add task to project {{project.name}}</p>
+  <form (ngSubmit)="onSubmit(taskCreateForm.value)" [formGroup]="taskCreateForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Enter Name</mat-label>
+        <input formControlName="name" matInput type="text">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Start date</mat-label>
+        <input [matDatepicker]="picker1" formControlName="startDate" matInput>
+        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>End date</mat-label>
+        <input [matDatepicker]="picker2" formControlName="endDate" matInput>
+        <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <button color="primary" mat-button type="submit">Add</button>
+    </div>
+  </form>
+</div>

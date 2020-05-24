@@ -11,6 +11,13 @@ import {HeaderComponent} from './layout/header/header.component';
 import {AddProjectComponent} from './components/project/add-project/add-project.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
+import {AddTaskComponent} from './components/task/add-task/add-task.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,8 @@ import {ManageProjectComponent} from './components/project/manage-project/manage
     ProjectsComponent,
     HeaderComponent,
     AddProjectComponent,
-    ManageProjectComponent
+    ManageProjectComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +40,13 @@ import {ManageProjectComponent} from './components/project/manage-project/manage
     }),
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

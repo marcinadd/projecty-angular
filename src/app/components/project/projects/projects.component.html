@@ -32,7 +32,9 @@
           </div>
           <ng-container *ngIf="projectRole.name === 'ADMIN'">
             <div class="p-2">
-              <button class="btn btn-success" id="addTaskButton" type="button">Add task</button>
+              <a [routerLink]="['/projects/',projectRole.project.id,'tasks/add']">
+                <button class="btn btn-success" id="addTaskButton" type="button">Add task</button>
+              </a>
             </div>
             <div class="p-2">
               <a [routerLink]="['/projects/',projectRole.project.id]">
