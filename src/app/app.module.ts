@@ -20,6 +20,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {TasksComponent} from './components/task/tasks/tasks.component';
 import {TaskInfoComponent} from './components/task/tasks/task-info/task-info.component';
+import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {TaskInfoComponent} from './components/task/tasks/task-info/task-info.com
     ManageProjectComponent,
     AddTaskComponent,
     TasksComponent,
-    TaskInfoComponent
+    TaskInfoComponent,
+    ManageTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import {TaskInfoComponent} from './components/task/tasks/task-info/task-info.com
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

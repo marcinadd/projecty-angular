@@ -6,6 +6,7 @@ import {AddProjectComponent} from './components/project/add-project/add-project.
 import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
 import {AddTaskComponent} from './components/task/add-task/add-task.component';
 import {TasksComponent} from './components/task/tasks/tasks.component';
+import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'projects/:id/tasks', component: TasksComponent},
   {path: 'projects/:id', component: ManageProjectComponent},
   {path: 'projects/add', component: AddProjectComponent},
+  {path: 'tasks/:id/manage', component: ManageTaskComponent},
 ];
 
 @NgModule({

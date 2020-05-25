@@ -1,7 +1,6 @@
 <div>
   <div *ngIf="hasPermissionToEdit; else elseBlock">
-    <!--    TODO Link to Manage Task here-->
-    <a [routerLink]="['/tasks',task.id]">
+    <a [routerLink]="['/tasks',task.id,'manage']">
       <div class="row text-center">{{task.name}}</div>
     </a>
   </div>

@@ -62,6 +62,7 @@ export class TasksComponent implements OnInit {
         this.projectTasksData.doneTasks = this.projectTasksData.doneTasks.filter(item => item.id !== task.id);
         break;
     }
+    task.status = newStatus;
     switch (newStatus) {
       case TaskStatus.TO_DO:
         this.projectTasksData.toDoTasks.push(task);

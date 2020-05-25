@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Task} from '../models/Task';
 import {Observable} from 'rxjs';
 import {ProjectTasksData} from '../models/ProjectTasksData';
+import {TaskData} from '../models/TaskData';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class TaskService {
 
   patchTask(taskId: number, patchedTask: Task): Observable<Task> {
     return this.http.patch<Task>(this.apiTaskUrl + '/' + taskId, patchedTask, environment.httpOptions);
+  }
+
+  getTaskData(taskId: number): Observable<TaskData> {
+    return this.http.get<TaskData>(this.apiTaskUrl + '/' + taskId);
   }
 }
