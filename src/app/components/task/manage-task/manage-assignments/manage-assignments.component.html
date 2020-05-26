@@ -1,0 +1,50 @@
+<div class="pt-3">
+  <h3>Manage assignments</h3>
+</div>
+<div class="row-my-2">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Remove assignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user in taskData.task.assignedUsers">
+      <td>{{user.username}}</td>
+      <td>
+        <!--          TODO Handle remove assigment here-->
+        <button class="btn btn-danger" type="submit">Remove assignment</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row my-2">
+  <h4>Add assigment</h4>
+</div>
+<div *ngIf="taskData.notAssignedUsernames.length !== 0; else elseBlock">
+  <div class="alert alert-primary" role="alert">
+    Assigned users can change task status.
+  </div>
+  <form>
+    <div>
+      <mat-form-field>
+        <mat-label>User</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let username of taskData.notAssignedUsernames" [value]="username">
+            {{username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <button color="primary" mat-button type="submit">Assign</button>
+    </div>
+  </form>
+</div>
+<ng-template #elseBlock>
+  <div>
+    <h5>All project/team users have been already assigned to this task.</h5>
+  </div>
+</ng-template>

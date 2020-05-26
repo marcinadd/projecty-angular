@@ -3,7 +3,8 @@ import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 import {TaskData} from '../../../models/TaskData';
-import {TaskStatus} from '../../../models/TaskStatus';
+import {Subject} from 'rxjs';
+import {Task} from '../../../models/Task';
 
 @Component({
   selector: 'app-manage-task',
@@ -12,35 +13,20 @@ import {TaskStatus} from '../../../models/TaskStatus';
 })
 export class ManageTaskComponent implements OnInit {
   taskData: TaskData;
-  changeTaskDataForm;
-  taskStatuses = Object.keys(TaskStatus);
+  eventsSubject: Subject<Task> = new Subject<Task>();
 
   constructor(
     private  taskService: TaskService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {
-    this.changeTaskDataForm = this.formBuilder.group({
-      name: '',
-      startDate: new Date(),
-      endDate: new Date(),
-      status: ''
-    });
+
   }
 
   ngOnInit(): void {
     this.taskService.getTaskData(Number(this.route.snapshot.paramMap.get('id'))).subscribe(taskData => {
       this.taskData = taskData;
-      const task = taskData.task;
-      this.changeTaskDataForm.setValue(
-        {name: task.name, startDate: task.startDate, endDate: task.endDate, status: TaskStatus[task.status]}
-      );
-    });
-  }
-
-  onSubmitChangeTaskData(form) {
-    this.taskService.patchTask(this.taskData.task.id, form).subscribe(task => {
-      this.taskData.task = task;
+      this.eventsSubject.next(taskData.task);
     });
   }
 }

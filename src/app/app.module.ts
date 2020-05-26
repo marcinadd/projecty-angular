@@ -22,6 +22,8 @@ import {TasksComponent} from './components/task/tasks/tasks.component';
 import {TaskInfoComponent} from './components/task/tasks/task-info/task-info.component';
 import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
 import {MatSelectModule} from '@angular/material/select';
+import {EditTaskComponent} from './components/task/manage-task/edit-task/edit-task.component';
+import {ManageAssignmentsComponent} from './components/task/manage-task/manage-assignments/manage-assignments.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {MatSelectModule} from '@angular/material/select';
     AddTaskComponent,
     TasksComponent,
     TaskInfoComponent,
-    ManageTaskComponent
+    ManageTaskComponent,
+    ManageAssignmentsComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,

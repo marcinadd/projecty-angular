@@ -1,69 +1,9 @@
 <div class="container">
   <h2 class="text-center">Manage task</h2>
   <h3>Edit task details</h3>
+  <app-edit-task [events]="eventsSubject.asObservable()" [taskData]="taskData"></app-edit-task>
 
-  <form (ngSubmit)="onSubmitChangeTaskData(changeTaskDataForm.value)" [formGroup]="changeTaskDataForm">
-    <div>
-      <mat-form-field>
-        <mat-label>Enter Name</mat-label>
-        <input formControlName="name" matInput type="text">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>Start date</mat-label>
-        <input [matDatepicker]="picker1" formControlName="startDate" matInput>
-        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>End date</mat-label>
-        <input [matDatepicker]="picker2" formControlName="endDate" matInput>
-        <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status">
-          <mat-option *ngFor="let status of taskStatuses" [value]="status">
-            {{status}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div>
-      <button color="primary" mat-button type="submit">Edit</button>
-    </div>
-  </form>
-  <div class="pt-3">
-    <h3>Manage assignments</h3>
-  </div>
-  <div class="row-my-2">
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">Remove assignment</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let user in taskData.task.assignedUsers">
-        <td>{{user.username}}</td>
-        <td>
-          <!--          TODO Handle remove assigment here-->
-          <button class="btn btn-danger" type="submit">Remove assignment</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row my-2">
-    <h4>Add assigment</h4>
-  </div>
+  <app-manage-assignments [taskData]="taskData"></app-manage-assignments>
   <!--  TODO Add user assigment-->
   <div class="row my-2">
     <h3>Delete task</h3>
