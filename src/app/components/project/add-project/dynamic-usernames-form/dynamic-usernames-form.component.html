@@ -1,0 +1,8 @@
+<div *ngFor="let user of u.controls; let i = index">
+  <mat-form-field [formGroup]="user">
+    <mat-label>User {{i + 1}} username</mat-label>
+    <input formControlName="username" matInput type="text">
+  </mat-form-field>
+  <button (click)="removeItem(i)" color="warn" mat-raised-button>-</button>
+</div>
+<button (click)="addItem()" color="primary" mat-raised-button type="button">+</button>

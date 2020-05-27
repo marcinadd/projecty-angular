@@ -24,6 +24,8 @@ import {ManageTaskComponent} from './components/task/manage-task/manage-task.com
 import {MatSelectModule} from '@angular/material/select';
 import {EditTaskComponent} from './components/task/manage-task/edit-task/edit-task.component';
 import {ManageAssignmentsComponent} from './components/task/manage-task/manage-assignments/manage-assignments.component';
+import {DynamicUsernamesFormComponent} from './components/project/add-project/dynamic-usernames-form/dynamic-usernames-form.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import {ManageAssignmentsComponent} from './components/task/manage-task/manage-a
     TaskInfoComponent,
     ManageTaskComponent,
     ManageAssignmentsComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    DynamicUsernamesFormComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import {ManageAssignmentsComponent} from './components/task/manage-task/manage-a
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

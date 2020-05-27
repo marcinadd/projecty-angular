@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
-import {FormArray, FormBuilder} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
+import {DynamicUsernamesFormComponent} from './dynamic-usernames-form/dynamic-usernames-form.component';
 
 @Component({
   selector: 'app-add-project',
@@ -11,6 +12,8 @@ import {Router} from '@angular/router';
 export class AddProjectComponent implements OnInit {
   projectCreateForm;
 
+  @ViewChild(DynamicUsernamesFormComponent, {static: false})
+  private usernamesComponent: DynamicUsernamesFormComponent;
 
   constructor(
     private projectService: ProjectService,
@@ -18,18 +21,8 @@ export class AddProjectComponent implements OnInit {
     private router: Router
   ) {
     this.projectCreateForm = this.formBuilder.group({
-      name: '',
-      usernames: new FormArray([])
+      name: ''
     });
-    this.addItem();
-  }
-
-  get f() {
-    return this.projectCreateForm.controls;
-  }
-
-  get u() {
-    return this.f.usernames as FormArray;
   }
 
   ngOnInit(): void {
@@ -37,19 +30,11 @@ export class AddProjectComponent implements OnInit {
 
   onSubmit(values) {
     const usernameArray = [];
-    values.usernames.forEach(value => {
+    this.usernamesComponent.usernamesForm.value.usernames.forEach(value => {
       usernameArray.push(value.username);
     });
     this.projectService.createProject({name: values.name, usernames: usernameArray}).subscribe(() => {
       this.router.navigate(['/projects']);
     });
-  }
-
-  removeItem(position) {
-    this.u.removeAt(position);
-  }
-
-  addItem() {
-    this.u.push(this.formBuilder.group({username: ''}));
   }
 }

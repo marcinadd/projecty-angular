@@ -7,15 +7,7 @@
              type="text"/>
     </div>
     <label>Add users</label><br>
-
-    <div *ngFor="let user of u.controls; let i = index">
-      <div [formGroup]="user">
-        <input formControlName="username" matInput type="text">
-        <button (click)="removeItem(i)" color="warn" mat-raised-button>-</button>
-      </div>
-    </div>
-
-    <button (click)="addItem()" color="primary" mat-raised-button type="button">+</button>
+    <app-dynamic-usernames-form></app-dynamic-usernames-form>
 
     <div class="form-group" id="users">
     </div>
