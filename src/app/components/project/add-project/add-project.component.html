@@ -6,12 +6,18 @@
       <input class="form-control" formControlName="name" id="name" name="name" placeholder="Enter project name"
              type="text"/>
     </div>
-    <div class="form-group">
-      <label>Add users</label><br>
-      <!--      TODO Add users here-->
-    </div>
-    <div class="form-group" id="users">
+    <label>Add users</label><br>
 
+    <div *ngFor="let user of u.controls; let i = index">
+      <div [formGroup]="user">
+        <input formControlName="username" matInput type="text">
+        <button (click)="removeItem(i)" color="warn" mat-raised-button>-</button>
+      </div>
+    </div>
+
+    <button (click)="addItem()" color="primary" mat-raised-button type="button">+</button>
+
+    <div class="form-group" id="users">
     </div>
     <div class="form-actions">
       <button class="btn btn-info" type="submit">Add project</button>

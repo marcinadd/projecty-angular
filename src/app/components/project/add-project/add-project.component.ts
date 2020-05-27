@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
-import {FormBuilder} from '@angular/forms';
+import {FormArray, FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class AddProjectComponent implements OnInit {
   projectCreateForm;
 
+
   constructor(
     private projectService: ProjectService,
     private formBuilder: FormBuilder,
@@ -18,16 +19,37 @@ export class AddProjectComponent implements OnInit {
   ) {
     this.projectCreateForm = this.formBuilder.group({
       name: '',
-      usernames: []
+      usernames: new FormArray([])
     });
+    this.addItem();
+  }
+
+  get f() {
+    return this.projectCreateForm.controls;
+  }
+
+  get u() {
+    return this.f.usernames as FormArray;
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(values) {
-    this.projectService.createProject(values).subscribe(() => {
+    const usernameArray = [];
+    values.usernames.forEach(value => {
+      usernameArray.push(value.username);
+    });
+    this.projectService.createProject({name: values.name, usernames: usernameArray}).subscribe(() => {
       this.router.navigate(['/projects']);
     });
+  }
+
+  removeItem(position) {
+    this.u.removeAt(position);
+  }
+
+  addItem() {
+    this.u.push(this.formBuilder.group({username: ''}));
   }
 }
