@@ -7,7 +7,7 @@ import {LoginComponent} from './components/login/login.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {HttpClientModule} from '@angular/common/http';
 import {ProjectsComponent} from './components/project/projects/projects.component';
-import {HeaderComponent} from './layout/header/header.component';
+import {NavbarComponent} from './layout/navbar/navbar.component';
 import {AddProjectComponent} from './components/project/add-project/add-project.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
@@ -32,7 +32,7 @@ import {MatDividerModule} from '@angular/material/divider';
     AppComponent,
     LoginComponent,
     ProjectsComponent,
-    HeaderComponent,
+    NavbarComponent,
     AddProjectComponent,
     ManageProjectComponent,
     AddTaskComponent,

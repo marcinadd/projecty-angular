@@ -11,8 +11,8 @@ export class AppComponent {
   title = 'projecty-angular';
 
   constructor(private oauthService: OAuthService) {
-    // this.oauthService.initLoginFlow();
     this.oauthService.configure(environment.authConfig);
+    this.oauthService.setupAutomaticSilentRefresh();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }
