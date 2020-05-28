@@ -30,7 +30,9 @@
           <button *ngIf="projectRole.user.id === currentUser.id" class="btn btn-danger disabled">
             Remove
           </button>
-          <button *ngIf="projectRole.user.id !== currentUser.id" class="btn btn-danger" type="submit">Remove</button>
+          <button (click)="onDeleteProjectRole(projectRole.id)" *ngIf="projectRole.user.id !== currentUser.id"
+                  class="btn btn-danger" type="submit">Remove
+          </button>
         </td>
         <td>
           <button *ngIf="projectRole.name === 'ADMIN' && projectRole.user.id !== currentUser.id" class="btn btn-success"
@@ -46,8 +48,8 @@
       </tbody>
     </table>
     <h3>Add users</h3>
-    <form (ngSubmit)="onAddUsers()">
-      <!--      TODO Add users here-->
+    <form (ngSubmit)="onAddProjectRoles()">
+      <app-dynamic-usernames-form></app-dynamic-usernames-form>
       <div class="form-actions">
         <button class="btn btn-success" type="submit">Add users</button>
       </div>

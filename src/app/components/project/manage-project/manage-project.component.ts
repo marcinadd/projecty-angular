@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute} from '@angular/router';
 import {Project} from '../../../models/Project';
 import {ProjectRole} from '../../../models/ProjectRole';
 import {User} from '../../../models/User';
+import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynamic-usernames-form.component';
+import {ProjectRoleService} from '../../../services/project-role.service';
 
 @Component({
   selector: 'app-manage-project',
@@ -16,8 +18,12 @@ export class ManageProjectComponent implements OnInit {
   currentUser: User;
   newName: string = '';
 
+  @ViewChild(DynamicUsernamesFormComponent, {static: false})
+  private usernamesComponent: DynamicUsernamesFormComponent;
+
   constructor(
     private projectService: ProjectService,
+    private projectRoleService: ProjectRoleService,
     private route: ActivatedRoute
   ) {
 
@@ -47,12 +53,17 @@ export class ManageProjectComponent implements OnInit {
 
   }
 
-  onDeleteUser() {
-
+  onDeleteProjectRole(projectRoleId: number) {
+    console.log(projectRoleId);
+    this.projectRoleService.deleteProjectRole(projectRoleId).subscribe(projectRole => {
+      this.projectRoles = this.projectRoles.filter(p => p.id !== projectRoleId);
+    });
   }
 
-  onAddUsers() {
-
+  onAddProjectRoles() {
+    this.projectService.addProjectRoles(this.project.id, this.usernamesComponent.getUsernameArray()).subscribe(projectRoles => {
+      this.projectRoles.push(...projectRoles);
+      console.log(projectRoles);
+    });
   }
-
 }

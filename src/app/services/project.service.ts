@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Project} from '../models/Project';
+import {ProjectRole} from '../models/ProjectRole';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class ProjectService {
 
   getProjectData(projectId: number): Observable<Project> {
     return this.http.get<Project>(this.apiProjectsUrl + '/' + projectId);
+  }
+
+  addProjectRoles(projectId: number, projectRoles: string[]): Observable<ProjectRole[]> {
+    return this.http.post<ProjectRole[]>(this.apiProjectsUrl + '/' + projectId + '/roles', projectRoles, environment.httpOptions);
   }
 }

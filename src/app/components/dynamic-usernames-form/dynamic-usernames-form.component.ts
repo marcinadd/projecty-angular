@@ -34,4 +34,12 @@ export class DynamicUsernamesFormComponent implements OnInit {
     this.u.push(this.formBuilder.group({username: ''}));
   }
 
+  getUsernameArray() {
+    const usernameArray = [];
+    this.usernamesForm.value.usernames.forEach(value => {
+      usernameArray.push(value.username);
+    });
+    return usernameArray;
+  }
+
 }
