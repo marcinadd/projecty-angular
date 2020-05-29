@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 import {TaskData} from '../../../models/TaskData';
 import {Subject} from 'rxjs';
@@ -18,7 +18,8 @@ export class ManageTaskComponent implements OnInit {
   constructor(
     private  taskService: TaskService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
   }
@@ -27,6 +28,12 @@ export class ManageTaskComponent implements OnInit {
     this.taskService.getTaskData(Number(this.route.snapshot.paramMap.get('id'))).subscribe(taskData => {
       this.taskData = taskData;
       this.eventsSubject.next(taskData.task);
+    });
+  }
+
+  onDeleteTask() {
+    this.taskService.deleteTask(this.taskData.task.id).subscribe(() => {
+      this.router.navigate(['/projects', this.taskData.task.project.id, '/tasks']);
     });
   }
 }

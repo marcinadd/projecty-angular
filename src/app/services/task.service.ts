@@ -5,6 +5,7 @@ import {Task} from '../models/Task';
 import {Observable} from 'rxjs';
 import {ProjectTasksData} from '../models/ProjectTasksData';
 import {TaskData} from '../models/TaskData';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,17 @@ export class TaskService {
 
   getTaskData(taskId: number): Observable<TaskData> {
     return this.http.get<TaskData>(this.apiTaskUrl + '/' + taskId);
+  }
+
+  assignUser(taskId: number, username: string): Observable<User> {
+    return this.http.post<User>(this.apiTaskUrl + '/' + taskId + '/assign', username, environment.httpOptions);
+  }
+
+  removeAssignment(taskId: number, username: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiTaskUrl}/${taskId}/assign/${username}`);
+  }
+
+  deleteTask(taskId: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.apiTaskUrl + '/' + taskId);
   }
 }

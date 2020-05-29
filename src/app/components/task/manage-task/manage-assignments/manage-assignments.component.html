@@ -9,12 +9,11 @@
       <th scope="col">Remove assignment</th>
     </tr>
     </thead>
-    <tbody>
-    <tr *ngFor="let user in taskData.task.assignedUsers">
+    <tbody *ngFor="let user of taskData.task.assignedUsers">
+    <tr>
       <td>{{user.username}}</td>
       <td>
-        <!--          TODO Handle remove assigment here-->
-        <button class="btn btn-danger" type="submit">Remove assignment</button>
+        <button (click)="onRemoveAssigment(user)" class="btn btn-danger" type="submit">Remove assignment</button>
       </td>
     </tr>
     </tbody>
@@ -27,11 +26,11 @@
   <div class="alert alert-primary" role="alert">
     Assigned users can change task status.
   </div>
-  <form>
+  <form (ngSubmit)="onAssignUser(assignUserForm.value)" [formGroup]="assignUserForm">
     <div>
       <mat-form-field>
         <mat-label>User</mat-label>
-        <mat-select>
+        <mat-select formControlName="username">
           <mat-option *ngFor="let username of taskData.notAssignedUsernames" [value]="username">
             {{username}}
           </mat-option>

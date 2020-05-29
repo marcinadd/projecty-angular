@@ -2,14 +2,9 @@
   <h2 class="text-center">Manage task</h2>
   <h3>Edit task details</h3>
   <app-edit-task [events]="eventsSubject.asObservable()" [taskData]="taskData"></app-edit-task>
-
   <app-manage-assignments [taskData]="taskData"></app-manage-assignments>
-  <!--  TODO Add user assigment-->
   <div class="row my-2">
     <h3>Delete task</h3>
   </div>
-  <form>
-    <!--    Add delete task here-->
-    <button class="btn btn-danger" type="submit">Delete task</button>
-  </form>
+  <button (click)="onDeleteTask()" class="btn btn-danger" type="submit">Delete task</button>
 </div>
