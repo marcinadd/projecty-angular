@@ -1,11 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Project} from '../../../models/Project';
 import {ProjectRole} from '../../../models/ProjectRole';
 import {User} from '../../../models/User';
 import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynamic-usernames-form.component';
 import {ProjectRoleService} from '../../../services/project-role.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DeleteDialogComponent} from '../../dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-manage-project',
@@ -16,7 +18,8 @@ export class ManageProjectComponent implements OnInit {
   project: Project = new Project();
   projectRoles: ProjectRole[];
   currentUser: User;
-  newName: string = '';
+  newName = '';
+  projectId = Number(this.route.snapshot.paramMap.get('id'));
 
   @ViewChild(DynamicUsernamesFormComponent, {static: false})
   private usernamesComponent: DynamicUsernamesFormComponent;
@@ -24,13 +27,15 @@ export class ManageProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private projectRoleService: ProjectRoleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private dialog: MatDialog
   ) {
 
   }
 
   ngOnInit(): void {
-    this.projectService.getProjectByIdWithRoles(Number(this.route.snapshot.paramMap.get('id'))).subscribe(data => {
+    this.projectService.getProjectByIdWithRoles(this.projectId).subscribe(data => {
       this.project = data.project;
       this.projectRoles = data.projectRoles;
       this.currentUser = data.currentUser;
@@ -45,16 +50,35 @@ export class ManageProjectComponent implements OnInit {
     });
   }
 
-  onDeleteProject() {
-
+  openDeleteDialog() {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {id: this.projectId, name: this.project.name}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.deleteProject();
+      }
+    });
   }
 
-  onChangeRole() {
+  deleteProject() {
+    this.projectService.deleteProject(this.projectId).subscribe(() => {
+      this.router.navigate(['/projects']);
+    });
+  }
 
+  onChangeRole(projectRole: ProjectRole, roleName: string) {
+    const patchRole = new ProjectRole();
+    patchRole.name = roleName;
+    this.projectRoleService.patchProjectRole(projectRole.id, patchRole).subscribe(patchedRole => {
+      const index = this.projectRoles.findIndex(p => p === projectRole);
+      this.projectRoles[index] = patchedRole;
+    });
   }
 
   onDeleteProjectRole(projectRoleId: number) {
-    console.log(projectRoleId);
     this.projectRoleService.deleteProjectRole(projectRoleId).subscribe(projectRole => {
       this.projectRoles = this.projectRoles.filter(p => p.id !== projectRoleId);
     });
@@ -63,7 +87,6 @@ export class ManageProjectComponent implements OnInit {
   onAddProjectRoles() {
     this.projectService.addProjectRoles(this.project.id, this.usernamesComponent.getUsernameArray()).subscribe(projectRoles => {
       this.projectRoles.push(...projectRoles);
-      console.log(projectRoles);
     });
   }
 }

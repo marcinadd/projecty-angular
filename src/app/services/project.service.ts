@@ -37,4 +37,8 @@ export class ProjectService {
   addProjectRoles(projectId: number, projectRoles: string[]): Observable<ProjectRole[]> {
     return this.http.post<ProjectRole[]>(this.apiProjectsUrl + '/' + projectId + '/roles', projectRoles, environment.httpOptions);
   }
+
+  deleteProject(projectId: number) {
+    return this.http.delete(this.apiProjectsUrl + '/' + projectId);
+  }
 }

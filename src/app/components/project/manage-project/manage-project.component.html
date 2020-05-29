@@ -36,11 +36,11 @@
         </td>
         <td>
           <button *ngIf="projectRole.name === 'ADMIN' && projectRole.user.id !== currentUser.id" class="btn btn-success"
-                  type="submit">
+                  (click)="onChangeRole(projectRole,'USER')" type="submit">
             Disable Admin
           </button>
           <button *ngIf="projectRole.name === 'USER' && projectRole.user.id !== currentUser.id" class="btn btn-danger"
-                  type="submit">
+                  (click)="onChangeRole(projectRole,'ADMIN')" type="submit">
             Enable Admin
           </button>
         </td>
@@ -63,5 +63,5 @@
     </div>
   </ng-container>
   <h3>Delete project</h3>
-  <button class="btn btn-danger" type="submit">Delete project</button>
+  <button (click)="openDeleteDialog()" class="btn btn-danger" type="submit">Delete project</button>
 </div>

@@ -1,0 +1,8 @@
+<div>
+  <h2 mat-dialog-title>Delete {{data.name}}?</h2>
+  <mat-dialog-content>This cannot be undone.</mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>Dismiss</button>
+    <button [mat-dialog-close]="data.id" mat-button>Delete</button>
+  </mat-dialog-actions>
+</div>
