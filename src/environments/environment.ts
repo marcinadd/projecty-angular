@@ -21,7 +21,7 @@ export const environment = {
     scope: 'profile email offline_access',
     showDebugInformation: true,
     requireHttps: false,
-    useSilentRefresh: true,
+    useSilentRefresh: true
   })
 };
 

@@ -44,7 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ManageAssignmentsComponent,
     EditTaskComponent,
     DynamicUsernamesFormComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,

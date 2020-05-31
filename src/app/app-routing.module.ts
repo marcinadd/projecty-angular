@@ -7,16 +7,21 @@ import {ManageProjectComponent} from './components/project/manage-project/manage
 import {AddTaskComponent} from './components/task/add-task/add-task.component';
 import {TasksComponent} from './components/task/tasks/tasks.component';
 import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
+import {AuthGuard} from './guards/auth.guard';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'projects', component: ProjectsComponent},
-  {path: 'projects/:id/tasks/add', component: AddTaskComponent},
-  {path: 'projects/:id/tasks', component: TasksComponent},
-  {path: 'projects/add', component: AddProjectComponent},
-  {path: 'projects/:id', component: ManageProjectComponent},
-  {path: 'tasks/:id/manage', component: ManageTaskComponent},
+  {
+    path: '', canActivate: [AuthGuard], children: [
+      {path: 'projects', component: ProjectsComponent},
+      {path: 'projects/:id/tasks/add', component: AddTaskComponent},
+      {path: 'projects/:id/tasks', component: TasksComponent},
+      {path: 'projects/add', component: AddProjectComponent},
+      {path: 'projects/:id', component: ManageProjectComponent},
+      {path: 'tasks/:id/manage', component: ManageTaskComponent},
+    ]
+  }
 ];
 
 @NgModule({

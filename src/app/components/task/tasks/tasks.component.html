@@ -1,4 +1,7 @@
 <div>
+  <a [routerLink]="['/projects',projectTasksData.project.id,'tasks','add']">
+    <button color="primary" mat-raised-button>Add task</button>
+  </a>
   <h1> Tasks for project: <b>{{projectTasksData.project.name}}</b></h1>
   <div class="container">
     <div class="row">

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormControl} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {TaskService} from '../../../services/task.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class AddTaskComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    const currentDate = new FormControl(new Date());
+    const currentDate = new Date();
     this.taskCreateForm = this.formBuilder.group({
       name: '',
       startDate: currentDate,
@@ -35,9 +35,8 @@ export class AddTaskComponent implements OnInit {
   }
 
   onSubmit(form) {
-    this.taskService.createTask(form, this.project.id).subscribe(task => {
-      // TODO Navigate to tasklist
-      console.log(task);
+    this.taskService.createTask(form, this.project.id).subscribe(() => {
+      this.router.navigate(['/projects', this.project.id, 'tasks']);
     });
   }
 }

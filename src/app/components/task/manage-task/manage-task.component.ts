@@ -33,7 +33,7 @@ export class ManageTaskComponent implements OnInit {
 
   onDeleteTask() {
     this.taskService.deleteTask(this.taskData.task.id).subscribe(() => {
-      this.router.navigate(['/projects', this.taskData.task.project.id, '/tasks']);
+      this.router.navigate(['/projects', this.taskData.projectId, 'tasks']);
     });
   }
 }
