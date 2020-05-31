@@ -1,0 +1,18 @@
+<div>
+  <h1>Add team</h1>
+  <form (ngSubmit)="onSubmit(teamCreateForm.value)" [formGroup]="teamCreateForm" class="form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" formControlName="name" id="name" name="name" placeholder="Enter team name"
+             type="text"/>
+    </div>
+    <label>Add users</label><br>
+    <app-dynamic-usernames-form></app-dynamic-usernames-form>
+
+    <div class="form-group" id="users">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-info" type="submit">Add team</button>
+    </div>
+  </form>
+</div>

@@ -8,6 +8,7 @@ import {AddTaskComponent} from './components/task/add-task/add-task.component';
 import {TasksComponent} from './components/task/tasks/tasks.component';
 import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
 import {AuthGuard} from './guards/auth.guard';
+import {AddTeamComponent} from './components/teams/add-team/add-team.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: 'projects/add', component: AddProjectComponent},
       {path: 'projects/:id', component: ManageProjectComponent},
       {path: 'tasks/:id/manage', component: ManageTaskComponent},
+      {path: 'teams/add', component: AddTeamComponent}
     ]
   }
 ];

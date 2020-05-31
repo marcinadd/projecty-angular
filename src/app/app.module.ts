@@ -28,6 +28,7 @@ import {DynamicUsernamesFormComponent} from './components/dynamic-usernames-form
 import {MatDividerModule} from '@angular/material/divider';
 import {DeleteDialogComponent} from './components/dialogs/delete-dialog/delete-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AddTeamComponent} from './components/teams/add-team/add-team.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     EditTaskComponent,
     DynamicUsernamesFormComponent,
     DeleteDialogComponent,
+    AddTeamComponent
   ],
   imports: [
     BrowserModule,
