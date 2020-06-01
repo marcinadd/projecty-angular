@@ -1,0 +1,53 @@
+<div>
+  <h2 class="text-center">My teams</h2>
+  <div class="container">
+    <button class="btn btn-success">Add new team</button>
+    <ul>
+      <li *ngFor="let teamRole of teamRoles" class="list-group-item my-2">
+        <b><p>Team name</p></b>
+        <div class="row">
+          <div class="mx-auto">{{teamRole.team.name}}</div>
+        </div>
+        <p>Users</p>
+        <div class="row">
+          <div class="mx-auto">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let teamRoleObj of teamRole.team.teamRoles">
+                <td>{{teamRoleObj.user.username}}</td>
+                <td>{{teamRoleObj.name}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p>Projects</p>
+        <div class="row">
+          <!--          TODO Add Team projects list here-->
+        </div>
+        <div class="d-flex justify-content-around">
+          <div class="p-2">
+            <button class="btn btn-secondary" id="projectListButton" type="button">Project list</button>
+          </div>
+          <ng-container *ngIf="teamRole.name === 'MANAGER'">
+            <div class="p-2">
+              <button class="btn btn-warning" id="addTaskButton" type="button">Manage team</button>
+            </div>
+            <div class="p-2">
+              <button class="btn btn-success" id="addProjectButton" type="button">Add project</button>
+            </div>
+          </ng-container>
+          <div class="p-2">
+            <button class="btn btn-danger" id="leaveTeamButton" type="submit">Leave team</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

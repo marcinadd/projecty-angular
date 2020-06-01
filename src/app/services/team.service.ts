@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Team} from '../models/Team';
+import {TeamRole} from '../models/TeamRole';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +18,7 @@ export class TeamService {
     return this.http.post<Team>(this.apiTeamsUrl, teamCreateForm, environment.httpOptions);
   }
 
+  getTeams(): Observable<TeamRole[]> {
+    return this.http.get<TeamRole[]>(this.apiTeamsUrl);
+  }
 }

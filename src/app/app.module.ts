@@ -29,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {DeleteDialogComponent} from './components/dialogs/delete-dialog/delete-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AddTeamComponent} from './components/teams/add-team/add-team.component';
+import {TeamsComponent} from './components/teams/teams/teams.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AddTeamComponent} from './components/teams/add-team/add-team.component';
     EditTaskComponent,
     DynamicUsernamesFormComponent,
     DeleteDialogComponent,
-    AddTeamComponent
+    AddTeamComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,
