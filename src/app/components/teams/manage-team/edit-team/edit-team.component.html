@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmitChangeTeamData(changeTeamDataForm.value)" [formGroup]="changeTeamDataForm">
+  <div>
+    <mat-form-field>
+      <mat-label>Enter Name</mat-label>
+      <input formControlName="name" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <button color="primary" mat-button type="submit">Edit</button>
+  </div>
+</form>

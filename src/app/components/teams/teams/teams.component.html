@@ -37,7 +37,9 @@
           </div>
           <ng-container *ngIf="teamRole.name === 'MANAGER'">
             <div class="p-2">
-              <button class="btn btn-warning" id="addTaskButton" type="button">Manage team</button>
+              <a [routerLink]="['/teams',teamRole.team.id,'manage']">
+                <button class="btn btn-warning" id="addTaskButton" type="button">Manage team</button>
+              </a>
             </div>
             <div class="p-2">
               <button class="btn btn-success" id="addProjectButton" type="button">Add project</button>

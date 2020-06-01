@@ -1,0 +1,19 @@
+<div>
+  <div class="row mb-3">
+    <h2>Manage team: <b>{{team.name}}</b></h2>
+  </div>
+  <div class="container">
+    <div class="row my-2">
+      <h3>Change team name</h3>
+    </div>
+    <app-edit-team [events]="eventsSubject.asObservable()" [team]="team"></app-edit-team>
+    <div class="row my-2">
+      <h3>Add users</h3>
+    </div>
+    <!--    TODO Add Users here-->
+    <div class="row my-2">
+      <h3>Delete team</h3>
+    </div>
+    <button class="btn btn-danger" type="submit">Delete team</button>
+  </div>
+</div>
