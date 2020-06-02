@@ -6,7 +6,14 @@
     <div class="row my-2">
       <h3>Change team name</h3>
     </div>
-    <app-edit-team [events]="eventsSubject.asObservable()" [team]="team"></app-edit-team>
+    <app-edit-team (nameChanged)="onNameChanged($event)" [events]="eventsSubject.asObservable()"
+                   [team]="team"></app-edit-team>
+
+    <div class="row my-2">
+      <h3>Manage roles</h3>
+    </div>
+    <app-manage-team-roles [teamRoles]="team.teamRoles"></app-manage-team-roles>
+
     <div class="row my-2">
       <h3>Add users</h3>
     </div>

@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Username</th>
+    <th scope="col">Role Name</th>
+    <th scope="col">Delete</th>
+    <th scope="col">Change role</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let teamRole of teamRoles">
+  <tr>
+    <td>{{teamRole.user.username}}</td>
+    <td>{{teamRole.name}}</td>
+    <td>
+      <button (click)="onDeleteTeamRole(teamRole)" class="btn btn-danger">Delete</button>
+    </td>
+    <td>
+      <button (click)="onChangeTeamRole(teamRole,'MEMBER')" *ngIf="teamRole.name === 'MANAGER'" class="btn btn-danger">
+        Disable Manager
+      </button>
+      <button (click)="onChangeTeamRole(teamRole,'MANAGER')" *ngIf="teamRole.name === 'MEMBER'" class="btn btn-success">
+        Enable Manager
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

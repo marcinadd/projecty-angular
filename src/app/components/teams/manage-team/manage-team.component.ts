@@ -28,4 +28,7 @@ export class ManageTeamComponent implements OnInit {
     });
   }
 
+  onNameChanged(teamWithNameChanged: Team) {
+    this.team = teamWithNameChanged;
+  }
 }
