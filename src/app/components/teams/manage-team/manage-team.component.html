@@ -12,11 +12,18 @@
     <div class="row my-2">
       <h3>Manage roles</h3>
     </div>
-    <app-manage-team-roles [teamRoles]="team.teamRoles"></app-manage-team-roles>
+    <app-manage-team-roles (teamRoleDeleted)="onTeamRoleDeleted($event)"
+                           [teamRoles]="team.teamRoles"></app-manage-team-roles>
 
     <div class="row my-2">
       <h3>Add users</h3>
     </div>
+    <form (ngSubmit)="onAddTeamRoles()">
+      <app-dynamic-usernames-form></app-dynamic-usernames-form>
+      <div class="form-actions">
+        <button class="btn btn-success" type="submit">Add users</button>
+      </div>
+    </form>
     <!--    TODO Add Users here-->
     <div class="row my-2">
       <h3>Delete team</h3>

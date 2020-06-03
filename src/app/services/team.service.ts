@@ -29,4 +29,8 @@ export class TeamService {
   patchTeam(teamId: number, patchedTeam): Observable<Team> {
     return this.http.patch<Team>(this.apiTeamsUrl + '/' + teamId, patchedTeam, environment.httpOptions);
   }
+
+  addTeamRoles(teamId: number, usernames: string[]): Observable<TeamRole[]> {
+    return this.http.post<TeamRole[]>(`${this.apiTeamsUrl}/${teamId}/roles`, usernames, environment.httpOptions);
+  }
 }

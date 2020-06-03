@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TeamRole} from '../../../../models/TeamRole';
 import {TeamRoleService} from '../../../../services/team-role.service';
 
@@ -9,6 +9,7 @@ import {TeamRoleService} from '../../../../services/team-role.service';
 })
 export class ManageTeamRolesComponent implements OnInit {
   @Input() teamRoles: TeamRole[];
+  @Output() teamRoleDeleted = new EventEmitter<TeamRole>();
 
   constructor(private teamRoleService: TeamRoleService) {
   }
@@ -18,7 +19,7 @@ export class ManageTeamRolesComponent implements OnInit {
 
   onDeleteTeamRole(teamRole: TeamRole) {
     this.teamRoleService.deleteTeamRole(teamRole.id).subscribe(data => {
-      this.teamRoles = this.teamRoles.filter(t => t !== teamRole);
+      this.teamRoleDeleted.emit(teamRole);
     });
   }
 
