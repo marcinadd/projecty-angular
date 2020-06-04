@@ -33,6 +33,7 @@ import {TeamsComponent} from './components/teams/teams/teams.component';
 import {ManageTeamComponent} from './components/teams/manage-team/manage-team.component';
 import {EditTeamComponent} from './components/teams/manage-team/edit-team/edit-team.component';
 import {ManageTeamRolesComponent} from './components/teams/manage-team/manage-team-roles/manage-team-roles.component';
+import {IndexComponent} from './components/index/index.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {ManageTeamRolesComponent} from './components/teams/manage-team/manage-te
     TeamsComponent,
     ManageTeamComponent,
     EditTeamComponent,
-    ManageTeamRolesComponent
+    ManageTeamRolesComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,

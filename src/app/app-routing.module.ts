@@ -11,23 +11,22 @@ import {AuthGuard} from './guards/auth.guard';
 import {AddTeamComponent} from './components/teams/add-team/add-team.component';
 import {TeamsComponent} from './components/teams/teams/teams.component';
 import {ManageTeamComponent} from './components/teams/manage-team/manage-team.component';
+import {IndexComponent} from './components/index/index.component';
 
 
 const routes: Routes = [
+  {path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]},
+  {path: 'projects/:id/tasks/add', component: AddTaskComponent, canActivate: [AuthGuard]},
+  {path: 'projects/:id/tasks', component: TasksComponent, canActivate: [AuthGuard]},
+  {path: 'projects/add', component: AddProjectComponent, canActivate: [AuthGuard]},
+  {path: 'projects/:id', component: ManageProjectComponent, canActivate: [AuthGuard]},
+  {path: 'tasks/:id/manage', component: ManageTaskComponent, canActivate: [AuthGuard]},
+  {path: 'teams/add', component: AddTeamComponent, canActivate: [AuthGuard]},
+  {path: 'teams/:id/manage', component: ManageTeamComponent, canActivate: [AuthGuard]},
+  {path: 'teams', component: TeamsComponent, canActivate: [AuthGuard]},
+
   {path: 'login', component: LoginComponent},
-  {
-    path: '', canActivate: [AuthGuard], children: [
-      {path: 'projects', component: ProjectsComponent},
-      {path: 'projects/:id/tasks/add', component: AddTaskComponent},
-      {path: 'projects/:id/tasks', component: TasksComponent},
-      {path: 'projects/add', component: AddProjectComponent},
-      {path: 'projects/:id', component: ManageProjectComponent},
-      {path: 'tasks/:id/manage', component: ManageTaskComponent},
-      {path: 'teams/add', component: AddTeamComponent},
-      {path: 'teams/:id/manage', component: ManageTeamComponent},
-      {path: 'teams', component: TeamsComponent}
-    ]
-  }
+  {path: '', component: IndexComponent},
 ];
 
 @NgModule({

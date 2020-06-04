@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.oauthService.initLoginFlow();
     this.oauthService.configure(environment.authConfig);
+    this.oauthService.initCodeFlow();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }
