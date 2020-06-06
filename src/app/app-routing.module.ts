@@ -12,6 +12,7 @@ import {AddTeamComponent} from './components/teams/add-team/add-team.component';
 import {TeamsComponent} from './components/teams/teams/teams.component';
 import {ManageTeamComponent} from './components/teams/manage-team/manage-team.component';
 import {IndexComponent} from './components/index/index.component';
+import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'projects/add', component: AddProjectComponent, canActivate: [AuthGuard]},
   {path: 'projects/:id', component: ManageProjectComponent, canActivate: [AuthGuard]},
   {path: 'tasks/:id/manage', component: ManageTaskComponent, canActivate: [AuthGuard]},
+  {path: 'teams/:id/projects/add', component: AddProjectSpecifiedTeamComponent, canActivate: [AuthGuard]},
   {path: 'teams/add', component: AddTeamComponent, canActivate: [AuthGuard]},
   {path: 'teams/:id/manage', component: ManageTeamComponent, canActivate: [AuthGuard]},
   {path: 'teams', component: TeamsComponent, canActivate: [AuthGuard]},

@@ -34,6 +34,8 @@ import {ManageTeamComponent} from './components/teams/manage-team/manage-team.co
 import {EditTeamComponent} from './components/teams/manage-team/edit-team/edit-team.component';
 import {ManageTeamRolesComponent} from './components/teams/manage-team/manage-team-roles/manage-team-roles.component';
 import {IndexComponent} from './components/index/index.component';
+import {MatIconModule} from '@angular/material/icon';
+import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import {IndexComponent} from './components/index/index.component';
     ManageTeamComponent,
     EditTeamComponent,
     ManageTeamRolesComponent,
-    IndexComponent
+    IndexComponent,
+    AddProjectSpecifiedTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import {IndexComponent} from './components/index/index.component';
     MatSelectModule,
     MatDividerModule,
     MatDialogModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

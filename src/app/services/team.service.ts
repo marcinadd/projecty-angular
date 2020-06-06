@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Team} from '../models/Team';
 import {TeamRole} from '../models/TeamRole';
+import {Project} from '../models/Project';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,13 @@ export class TeamService {
 
   addTeamRoles(teamId: number, usernames: string[]): Observable<TeamRole[]> {
     return this.http.post<TeamRole[]>(`${this.apiTeamsUrl}/${teamId}/roles`, usernames, environment.httpOptions);
+  }
+
+  getTeamName(teamId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiTeamsUrl}/${teamId}/name`);
+  }
+
+  addProjectToSpecifiedTeam(teamId: number, project): Observable<Project> {
+    return this.http.post<Project>(`${this.apiTeamsUrl}/${teamId}/projects`, project, environment.httpOptions);
   }
 }

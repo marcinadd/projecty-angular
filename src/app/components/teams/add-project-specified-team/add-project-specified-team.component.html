@@ -1,0 +1,12 @@
+<h1>Add project to team: <b>{{teamName}}</b></h1>
+<form (ngSubmit)="onSubmit(projectCreateForm.value)" [formGroup]="projectCreateForm">
+  <div>
+    <mat-form-field class="width50vw">
+      <mat-label>Enter Project Name</mat-label>
+      <input formControlName="name" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <button color="primary" mat-raised-button type="submit">Add</button>
+  </div>
+</form>
