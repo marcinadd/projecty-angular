@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TeamService} from '../../../services/team.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
 @Component({
@@ -16,7 +16,8 @@ export class AddProjectSpecifiedTeamComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -31,7 +32,7 @@ export class AddProjectSpecifiedTeamComponent implements OnInit {
 
   onSubmit(form) {
     this.teamService.addProjectToSpecifiedTeam(this.teamId, form).subscribe(project => {
-      console.log(project);
+      this.router.navigate(['/teams', this.teamId, 'projects']);
     });
   }
 }

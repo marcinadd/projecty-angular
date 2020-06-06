@@ -1,0 +1,25 @@
+<div>
+  <h2>Project list for team:<b>{{teamProjectsData.teamName}}</b></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Task list</th>
+      <th *ngIf="teamProjectsData.isCurrentUserTeamManager" scope="col">Manage project</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let project of teamProjectsData.projects">
+      <td>{{project.name}}</td>
+      <td>
+        <a [routerLink]="['/projects',project.id,'tasks']">
+          <button class="btn btn-primary">Task list</button>
+        </a>
+      </td>
+      <td *ngIf="teamProjectsData.isCurrentUserTeamManager">
+        <a [routerLink]="['/projects',project.id]">
+          <button class="btn btn-warning">Manage project</button>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>

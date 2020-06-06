@@ -36,7 +36,7 @@
       </div>
       <div class="d-flex justify-content-around">
         <div class="p-2">
-          <a [routerLink]="['/teams',teamRole.team.id,'projects','add']">
+          <a [routerLink]="['/teams',teamRole.team.id,'projects']">
             <button class="btn btn-secondary" id="projectListButton" type="button">Project list</button>
           </a>
         </div>
@@ -47,7 +47,9 @@
             </a>
           </div>
           <div class="p-2">
-            <button class="btn btn-success" id="addProjectButton" type="button">Add project</button>
+            <a [routerLink]="['/teams',teamRole.team.id,'projects','add']">
+              <button class="btn btn-success" id="addProjectButton" type="button">Add project</button>
+            </a>
           </div>
         </ng-container>
         <div class="p-2">

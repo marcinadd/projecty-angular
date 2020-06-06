@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Team} from '../models/Team';
 import {TeamRole} from '../models/TeamRole';
 import {Project} from '../models/Project';
+import {TeamProjectsData} from '../models/TeamProjectsData';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,9 @@ export class TeamService {
 
   addProjectToSpecifiedTeam(teamId: number, project): Observable<Project> {
     return this.http.post<Project>(`${this.apiTeamsUrl}/${teamId}/projects`, project, environment.httpOptions);
+  }
+
+  getTeamProjects(teamId: number): Observable<TeamProjectsData> {
+    return this.http.get<TeamProjectsData>(`${this.apiTeamsUrl}/${teamId}/projects`);
   }
 }

@@ -36,6 +36,7 @@ import {ManageTeamRolesComponent} from './components/teams/manage-team/manage-te
 import {IndexComponent} from './components/index/index.component';
 import {MatIconModule} from '@angular/material/icon';
 import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
+import {TeamProjectsComponent} from './components/teams/team-projects/team-projects.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-s
     EditTeamComponent,
     ManageTeamRolesComponent,
     IndexComponent,
-    AddProjectSpecifiedTeamComponent
+    AddProjectSpecifiedTeamComponent,
+    TeamProjectsComponent
   ],
   imports: [
     BrowserModule,
