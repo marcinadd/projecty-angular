@@ -55,4 +55,30 @@
       </div>
     </li>
   </ul>
+  <mat-tab-group>
+    <mat-tab *ngFor="let teamProject of projectsTeam" [label]="teamProject.team.name">
+      <mat-list>
+        <mat-list-item *ngFor="let project of teamProject.projects">
+          <h3 mat-line> {{project.name}}</h3>
+          <a [routerLink]="['/projects/',project.id,'tasks']" class="inheritColor">
+            <button mat-icon-button>
+              <mat-icon>list</mat-icon>
+            </button>
+          </a>
+          <ng-container *ngIf="teamProject.role === 'MANAGER'">
+            <a [routerLink]="['/projects/',project.id,'tasks','add']" class="inheritColor">
+              <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button>
+            </a>
+            <a [routerLink]="['/projects/',project.id]" class="inheritColor">
+              <button mat-icon-button>
+                <mat-icon>settings</mat-icon>
+              </button>
+            </a>
+          </ng-container>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
+  </mat-tab-group>
 </div>

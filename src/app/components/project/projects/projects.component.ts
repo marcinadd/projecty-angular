@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {ProjectRole} from '../../../models/ProjectRole';
+import {ProjectsTeamData} from '../../../models/ProjectsTeamData';
 
 @Component({
   selector: 'app-projects',
@@ -9,6 +10,7 @@ import {ProjectRole} from '../../../models/ProjectRole';
 })
 export class ProjectsComponent implements OnInit {
   projectRoles: ProjectRole[];
+  projectsTeam: ProjectsTeamData[];
 
   constructor(private projectService: ProjectService) {
   }
@@ -17,6 +19,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getProjects().subscribe(data => {
       console.log(data);
       this.projectRoles = data.projectRoles;
+      this.projectsTeam = data.teamProjects;
     });
   }
 }

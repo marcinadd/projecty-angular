@@ -37,6 +37,8 @@ import {IndexComponent} from './components/index/index.component';
 import {MatIconModule} from '@angular/material/icon';
 import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
 import {TeamProjectsComponent} from './components/teams/team-projects/team-projects.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import {TeamProjectsComponent} from './components/teams/team-projects/team-proje
     MatDividerModule,
     MatDialogModule,
     MatIconModule,
+    MatTabsModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

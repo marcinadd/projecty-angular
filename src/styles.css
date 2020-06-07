@@ -12,3 +12,7 @@ body {
 .width50vw {
   width: 50vw;
 }
+
+.inheritColor {
+  color: inherit;
+}
