@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit(messageForm.value)" [formGroup]="messageForm">
+  <div>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input formControlName="recipientUsername" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Subject</mat-label>
+      <input formControlName="title" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Text</mat-label>
+      <input formControlName="text" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <button color="primary" mat-raised-button type="submit">Add</button>
+  </div>
+</form>

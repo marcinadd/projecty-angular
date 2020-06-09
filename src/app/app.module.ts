@@ -39,6 +39,8 @@ import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-s
 import {TeamProjectsComponent} from './components/teams/team-projects/team-projects.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
+import {MessagesComponent} from './components/message/messages/messages.component';
+import {SendMessageComponent} from './components/message/send-message/send-message.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import {MatListModule} from '@angular/material/list';
     ManageTeamRolesComponent,
     IndexComponent,
     AddProjectSpecifiedTeamComponent,
-    TeamProjectsComponent
+    TeamProjectsComponent,
+    MessagesComponent,
+    SendMessageComponent
   ],
   imports: [
     BrowserModule,

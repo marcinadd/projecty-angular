@@ -14,6 +14,8 @@ import {ManageTeamComponent} from './components/teams/manage-team/manage-team.co
 import {IndexComponent} from './components/index/index.component';
 import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
 import {TeamProjectsComponent} from './components/teams/team-projects/team-projects.component';
+import {MessagesComponent} from './components/message/messages/messages.component';
+import {SendMessageComponent} from './components/message/send-message/send-message.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   {path: 'teams/add', component: AddTeamComponent, canActivate: [AuthGuard]},
   {path: 'teams/:id/manage', component: ManageTeamComponent, canActivate: [AuthGuard]},
   {path: 'teams', component: TeamsComponent, canActivate: [AuthGuard]},
+  {path: 'messages/send', component: SendMessageComponent, canActivate: [AuthGuard]},
+  {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
 
   {path: 'login', component: LoginComponent},
   {path: '', component: IndexComponent},
