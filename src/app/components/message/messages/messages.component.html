@@ -1,10 +1,39 @@
+<!--displayedColumns: string[] = ['username', 'title', 'text', 'sendDate'];-->
 <mat-tab-group>
   <mat-tab label="Received">
-    <mat-list-item *ngFor="let message of receivedMessages">
-      {{message.text}}
-    </mat-list-item>
+
+
+    <!--    <mat-list-item *ngFor="let message of receivedMessages">-->
+    <!--      {{message.text}}-->
+    <!--      <mat-divider [vertical]="true"></mat-divider>-->
+    <!--      {{message.sender.username}}-->
+    <!--    </mat-list-item>-->
+    <table [dataSource]="receivedMessages" class="mat-elevation-z8" mat-table>
+      <ng-container matColumnDef="username">
+        <th *matHeaderCellDef mat-header-cell> Username</th>
+        <td *matCellDef="let message" mat-cell> {{message.sender.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th *matHeaderCellDef mat-header-cell> Title</th>
+        <td *matCellDef="let message" mat-cell> {{message.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="text">
+        <th *matHeaderCellDef mat-header-cell> Text</th>
+        <td *matCellDef="let message" mat-cell> {{message.text}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sendDate">
+        <th *matHeaderCellDef mat-header-cell> Date</th>
+        <td *matCellDef="let message" mat-cell> {{message.sendDate | date:'dd.MM.yyyy HH:mm'}} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" class="pointer" mat-row></tr>
+    </table>
+
   </mat-tab>
   <mat-tab label="Send">
-
   </mat-tab>
 </mat-tab-group>

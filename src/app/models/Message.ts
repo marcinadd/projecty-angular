@@ -1,6 +1,7 @@
 import {User} from './User';
 
 export class Message {
+  id: number;
   sender: User;
   recipient: User;
   sendDate: Date;

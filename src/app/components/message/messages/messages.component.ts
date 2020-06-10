@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Message} from '../../../models/Message';
 import {MessageService} from '../../../services/message.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -9,8 +10,12 @@ import {MessageService} from '../../../services/message.service';
 })
 export class MessagesComponent implements OnInit {
   receivedMessages: Message[];
+  displayedColumns: string[] = ['username', 'title', 'text', 'sendDate'];
 
-  constructor(private messageService: MessageService) {
+  constructor(
+    private messageService: MessageService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -19,4 +24,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
+  onClick(message: Message) {
+    this.router.navigate(['messages', message.id]);
+  }
 }

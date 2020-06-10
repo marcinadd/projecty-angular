@@ -41,6 +41,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MessagesComponent} from './components/message/messages/messages.component';
 import {SendMessageComponent} from './components/message/send-message/send-message.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTableModule} from '@angular/material/table';
+import {ViewMessageComponent} from './components/message/view-message/view-message.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,8 @@ import {SendMessageComponent} from './components/message/send-message/send-messa
     AddProjectSpecifiedTeamComponent,
     TeamProjectsComponent,
     MessagesComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    ViewMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +97,8 @@ import {SendMessageComponent} from './components/message/send-message/send-messa
     MatIconModule,
     MatTabsModule,
     MatListModule,
+    MatGridListModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

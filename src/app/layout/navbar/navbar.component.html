@@ -48,11 +48,13 @@
         <!--            <i class="fas fa-comments"></i>-->
         <!--            <span>Chat</span>-->
         <!--        </li>-->
-        <!--        <li class="nav-item">-->
-        <!--            <i class="fas fa-envelope"></i>-->
-        <!--            <span>Messages</span>-->
-        <!--            <span class="text-warning">(0)</span>-->
-        <!--        </li>-->
+        <li class="nav-item">
+          <a [routerLink]="['/messages']" class="nav-link">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+            <span class="text-warning">(0)</span>
+          </a>
+        </li>
         <!--        <li class="nav-item">-->
         <!--            <i class="fas fa-bell"></i>-->
         <!--            <span>Notifications</span>-->

@@ -16,3 +16,11 @@ body {
 .inheritColor {
   color: inherit;
 }
+
+table {
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}

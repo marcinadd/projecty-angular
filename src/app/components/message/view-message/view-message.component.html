@@ -1,0 +1,17 @@
+<div>
+  <button [routerLink]="['/messages']" color="primary" mat-fab>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+<div class="my-4">
+  <p><b>From: </b>{{message.sender.username}}</p>
+  <p><b>To: </b>{{message.recipient.username}}</p>
+  <p><b>Date: </b>{{message.sendDate | date:'dd.MM.yyyy HH:mm:SS'}}</p>
+  <span class="border">
+    <p>
+      <b>Text: </b>
+      <br>
+      {{message.text}}
+    </p>
+  </span>
+</div>
