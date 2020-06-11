@@ -44,6 +44,7 @@ import {SendMessageComponent} from './components/message/send-message/send-messa
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {ViewMessageComponent} from './components/message/view-message/view-message.component';
+import {ProjectRolesDialogComponent} from './components/project/projects/dialog/project-roles-dialog/project-roles-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {ViewMessageComponent} from './components/message/view-message/view-messa
     TeamProjectsComponent,
     MessagesComponent,
     SendMessageComponent,
-    ViewMessageComponent
+    ViewMessageComponent,
+    ProjectRolesDialogComponent
   ],
   imports: [
     BrowserModule,
