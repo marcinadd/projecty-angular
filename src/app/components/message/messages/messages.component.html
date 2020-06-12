@@ -1,13 +1,5 @@
-<!--displayedColumns: string[] = ['username', 'title', 'text', 'sendDate'];-->
 <mat-tab-group>
   <mat-tab label="Received">
-
-
-    <!--    <mat-list-item *ngFor="let message of receivedMessages">-->
-    <!--      {{message.text}}-->
-    <!--      <mat-divider [vertical]="true"></mat-divider>-->
-    <!--      {{message.sender.username}}-->
-    <!--    </mat-list-item>-->
     <table [dataSource]="receivedMessages" class="mat-elevation-z8" mat-table>
       <ng-container matColumnDef="username">
         <th *matHeaderCellDef mat-header-cell> Username</th>
@@ -32,8 +24,12 @@
       <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
       <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" class="pointer" mat-row></tr>
     </table>
-
+    <mat-paginator (page)="onPageEvent($event)"
+                   [length]="pageLength"
+                   [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                   [pageSize]="pageSize">
+    </mat-paginator>
   </mat-tab>
-  <mat-tab label="Send">
+  <mat-tab label="Sent">
   </mat-tab>
 </mat-tab-group>

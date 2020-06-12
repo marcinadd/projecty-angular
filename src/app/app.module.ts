@@ -45,6 +45,7 @@ import {MatTableModule} from '@angular/material/table';
 import {ViewMessageComponent} from './components/message/view-message/view-message.component';
 import {ProjectRolesDialogComponent} from './components/project/projects/dialog/project-roles-dialog/project-roles-dialog.component';
 import {AddProjectDialogComponent} from './components/project/projects/dialog/add-project-dialog/add-project-dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import {AddProjectDialogComponent} from './components/project/projects/dialog/ad
     MatListModule,
     MatGridListModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

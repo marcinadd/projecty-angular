@@ -31,9 +31,9 @@
                 </ng-template>
                 <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
                   <div class="row">
-                    <div class="col">
-                      <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" class="btn btn-info">&gt;</button>
-                    </div>
+                    <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" color="primary" mat-mini-fab>
+                      <mat-icon>arrow_forward</mat-icon>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -69,10 +69,16 @@
                 <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
                   <div class="row">
                     <div class="col">
-                      <button (click)="onStatusChange(task,taskStatuses.TO_DO)" class="btn btn-info">&lt;</button>
+                      <button (click)="onStatusChange(task,taskStatuses.TO_DO)" color="primary" mat-mini-fab>
+                        <mat-icon>arrow_back</mat-icon>
+                      </button>
                     </div>
                     <div class="col">
-                      <button (click)="onStatusChange(task,taskStatuses.DONE)" class="btn btn-info">&gt;</button>
+                      <div class="col">
+                        <button (click)="onStatusChange(task,taskStatuses.DONE)" color="primary" mat-mini-fab>
+                          <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -98,7 +104,9 @@
                 <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">
                   <div class="row">
                     <div class="col">
-                      <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" class="btn btn-info">&lt;</button>
+                      <button (click)="onStatusChange(task,taskStatuses.IN_PROGRESS)" color="primary" mat-mini-fab>
+                        <mat-icon>arrow_back</mat-icon>
+                      </button>
                     </div>
                   </div>
                 </div>
