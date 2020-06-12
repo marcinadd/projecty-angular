@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {ProjectsComponent} from './components/project/projects/projects.component';
-import {AddProjectComponent} from './components/project/add-project/add-project.component';
 import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
 import {AddTaskComponent} from './components/task/add-task/add-task.component';
 import {TasksComponent} from './components/task/tasks/tasks.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   {path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard]},
   {path: 'projects/:id/tasks/add', component: AddTaskComponent, canActivate: [AuthGuard]},
   {path: 'projects/:id/tasks', component: TasksComponent, canActivate: [AuthGuard]},
-  {path: 'projects/add', component: AddProjectComponent, canActivate: [AuthGuard]},
   {path: 'projects/:id', component: ManageProjectComponent, canActivate: [AuthGuard]},
   {path: 'tasks/:id/manage', component: ManageTaskComponent, canActivate: [AuthGuard]},
   {path: 'teams/:id/projects/add', component: AddProjectSpecifiedTeamComponent, canActivate: [AuthGuard]},

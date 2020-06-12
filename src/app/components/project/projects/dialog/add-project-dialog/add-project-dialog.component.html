@@ -1,6 +1,6 @@
-<div>
-  <h1>Add project</h1>
-  <form (ngSubmit)="onSubmit(projectCreateForm.value)" [formGroup]="projectCreateForm" class="form">
+<h2 mat-dialog-title>Create new project</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="projectCreateForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input class="form-control" formControlName="name" id="name" name="name" placeholder="Enter project name"
@@ -8,11 +8,11 @@
     </div>
     <label>Add users</label><br>
     <app-dynamic-usernames-form></app-dynamic-usernames-form>
-
     <div class="form-group" id="users">
     </div>
-    <div class="form-actions">
-      <button class="btn btn-info" type="submit">Add project</button>
-    </div>
   </form>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
+  <button [mat-dialog-close]="onYesClick()" cdkFocusInitial mat-button>Create</button>
+</mat-dialog-actions>

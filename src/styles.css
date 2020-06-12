@@ -24,3 +24,7 @@ table {
 .pointer {
   cursor: pointer;
 }
+
+.right {
+  justify-content: flex-end;
+}

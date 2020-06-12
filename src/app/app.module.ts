@@ -8,7 +8,6 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 import {HttpClientModule} from '@angular/common/http';
 import {ProjectsComponent} from './components/project/projects/projects.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
-import {AddProjectComponent} from './components/project/add-project/add-project.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ManageProjectComponent} from './components/project/manage-project/manage-project.component';
 import {AddTaskComponent} from './components/task/add-task/add-task.component';
@@ -45,6 +44,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {ViewMessageComponent} from './components/message/view-message/view-message.component';
 import {ProjectRolesDialogComponent} from './components/project/projects/dialog/project-roles-dialog/project-roles-dialog.component';
+import {AddProjectDialogComponent} from './components/project/projects/dialog/add-project-dialog/add-project-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,6 @@ import {ProjectRolesDialogComponent} from './components/project/projects/dialog/
     LoginComponent,
     ProjectsComponent,
     NavbarComponent,
-    AddProjectComponent,
     ManageProjectComponent,
     AddTaskComponent,
     TasksComponent,
@@ -73,7 +72,8 @@ import {ProjectRolesDialogComponent} from './components/project/projects/dialog/
     MessagesComponent,
     SendMessageComponent,
     ViewMessageComponent,
-    ProjectRolesDialogComponent
+    ProjectRolesDialogComponent,
+    AddProjectDialogComponent
   ],
   imports: [
     BrowserModule,
