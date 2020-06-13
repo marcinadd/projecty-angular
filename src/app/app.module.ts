@@ -46,6 +46,7 @@ import {ViewMessageComponent} from './components/message/view-message/view-messa
 import {ProjectRolesDialogComponent} from './components/project/projects/dialog/project-roles-dialog/project-roles-dialog.component';
 import {AddProjectDialogComponent} from './components/project/projects/dialog/add-project-dialog/add-project-dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MessageListComponent} from './components/message/messages/message-list/message-list.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SendMessageComponent,
     ViewMessageComponent,
     ProjectRolesDialogComponent,
-    AddProjectDialogComponent
+    AddProjectDialogComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,35 +1,8 @@
 <mat-tab-group>
   <mat-tab label="Received">
-    <table [dataSource]="receivedMessages" class="mat-elevation-z8" mat-table>
-      <ng-container matColumnDef="username">
-        <th *matHeaderCellDef mat-header-cell> Username</th>
-        <td *matCellDef="let message" mat-cell> {{message.sender.username}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell> Title</th>
-        <td *matCellDef="let message" mat-cell> {{message.title}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="text">
-        <th *matHeaderCellDef mat-header-cell> Text</th>
-        <td *matCellDef="let message" mat-cell> {{message.text}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="sendDate">
-        <th *matHeaderCellDef mat-header-cell> Date</th>
-        <td *matCellDef="let message" mat-cell> {{message.sendDate | date:'dd.MM.yyyy HH:mm'}} </td>
-      </ng-container>
-
-      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-      <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" class="pointer" mat-row></tr>
-    </table>
-    <mat-paginator (page)="onPageEvent($event)"
-                   [length]="pageLength"
-                   [pageSizeOptions]="[1, 5, 10, 25, 100]"
-                   [pageSize]="pageSize">
-    </mat-paginator>
+    <app-message-list [messageType]="messageType.RECEIVED"></app-message-list>
   </mat-tab>
   <mat-tab label="Sent">
+    <app-message-list [messageType]="messageType.SENT"></app-message-list>
   </mat-tab>
 </mat-tab-group>

@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Message} from '../models/Message';
 import {Page} from '../models/Page';
+import {MessageType} from '../models/MessageType';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,12 @@ export class MessageService {
   constructor(private http: HttpClient) {
   }
 
-  getReceivedMessages(page: number, itemsPerPage: number): Observable<Page<Message>> {
+  getPageOfMessages(messageType: MessageType, page: number, itemsPerPage: number): Observable<Page<Message>> {
     const params = new HttpParams()
+      .set('type', MessageType[messageType])
       .set('page', String(page))
       .set('itemsPerPage', String(itemsPerPage));
-    return this.http.get<Page<Message>>(this.apiMessageUrl + '/receivedMessages', {params});
+    return this.http.get<Page<Message>>(this.apiMessageUrl, {params});
   }
 
   sendMessage(messageForm): Observable<Message> {
