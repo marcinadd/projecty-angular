@@ -1,5 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder} from '@angular/forms';
+import {UserService} from '../../services/user.service';
+
+class UsernameFormItem {
+  username: string;
+  autocomplete: any;
+}
+
 
 @Component({
   selector: 'app-dynamic-usernames-form',
@@ -9,8 +16,13 @@ import {FormArray, FormBuilder} from '@angular/forms';
 export class DynamicUsernamesFormComponent implements OnInit {
   usernamesForm;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.usernamesForm = this.formBuilder.group({usernames: new FormArray([])});
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {
+    this.usernamesForm = this.formBuilder.group({
+      items: new FormArray([])
+    });
     this.addItem();
   }
 
@@ -19,7 +31,7 @@ export class DynamicUsernamesFormComponent implements OnInit {
   }
 
   get u() {
-    return this.f.usernames as FormArray;
+    return this.f.items as FormArray;
   }
 
   ngOnInit(): void {
@@ -31,15 +43,28 @@ export class DynamicUsernamesFormComponent implements OnInit {
   }
 
   addItem() {
-    this.u.push(this.formBuilder.group({username: ''}));
+    const usernameFormItem = new UsernameFormItem();
+    usernameFormItem.username = '';
+    usernameFormItem.autocomplete = [];
+    this.u.push(this.formBuilder.group(usernameFormItem));
   }
 
   getUsernameArray() {
     const usernameArray = [];
-    this.usernamesForm.value.usernames.forEach(value => {
+    this.usernamesForm.value.items.forEach(value => {
       usernameArray.push(value.username);
     });
-    return usernameArray;
+    return usernameArray[0];
   }
 
+  onTextChanged(user) {
+    const username = user.value.username;
+    if (username.length >= 4) {
+      this.userService.getUsernamesStartWith(username).subscribe(usernames => {
+        user.patchValue({autocomplete: usernames.length > 0 ? [usernames] : []});
+      });
+    } else {
+      user.patchValue({autocomplete: []});
+    }
+  }
 }

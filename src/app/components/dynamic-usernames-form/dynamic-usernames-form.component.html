@@ -1,7 +1,12 @@
 <div *ngFor="let user of u.controls; let i = index">
   <mat-form-field [formGroup]="user">
     <mat-label>User {{i + 1}} username</mat-label>
-    <input formControlName="username" matInput type="text">
+    <input (input)="onTextChanged(user)" [matAutocomplete]="auto" formControlName="username" matInput type="text">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of user.value.autocomplete" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
   <button (click)="removeItem(i)" color="warn" mat-raised-button>-</button>
 </div>
