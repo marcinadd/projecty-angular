@@ -52,16 +52,18 @@ export class DynamicUsernamesFormComponent implements OnInit {
   getUsernameArray() {
     const usernameArray = [];
     this.usernamesForm.value.items.forEach(value => {
-      usernameArray.push(value.username);
+      if (!value.isBlank) {
+        usernameArray.push(value.username);
+      }
     });
-    return usernameArray[0];
+    return usernameArray;
   }
 
   onTextChanged(user) {
     const username = user.value.username;
     if (username.length >= 4) {
       this.userService.getUsernamesStartWith(username).subscribe(usernames => {
-        user.patchValue({autocomplete: usernames.length > 0 ? [usernames] : []});
+        user.patchValue({autocomplete: usernames.length > 0 ? usernames : []});
       });
     } else {
       user.patchValue({autocomplete: []});

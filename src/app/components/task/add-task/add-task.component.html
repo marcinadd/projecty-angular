@@ -1,6 +1,6 @@
-<div>
-  <p>Add task to project {{project.name}}</p>
-  <form (ngSubmit)="onSubmit(taskCreateForm.value)" [formGroup]="taskCreateForm">
+<h2>Add task to project {{project.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="taskCreateForm">
     <div>
       <mat-form-field>
         <mat-label>Enter Name</mat-label>
@@ -27,4 +27,8 @@
       <button color="primary" mat-raised-button type="submit">Add</button>
     </div>
   </form>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
+  <button [mat-dialog-close]="onYesClick()" cdkFocusInitial mat-button>Add</button>
+</mat-dialog-actions>

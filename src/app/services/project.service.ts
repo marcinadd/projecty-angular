@@ -19,6 +19,7 @@ export class ProjectService {
   }
 
   createProject(projectCreateForm): Observable<Project> {
+    console.log(projectCreateForm);
     return this.http.post<Project>(this.apiProjectsUrl, projectCreateForm, environment.httpOptions);
   }
 

@@ -1,3 +1,8 @@
+<div>
+  <button [routerLink]="['/messages/send']" color="primary" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 <mat-tab-group>
   <mat-tab label="Received">
     <app-message-list [messageType]="messageType.RECEIVED"></app-message-list>

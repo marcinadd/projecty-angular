@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MessageService} from '../../../services/message.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-send-message',
@@ -12,7 +13,8 @@ export class SendMessageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
   }
 
@@ -26,7 +28,7 @@ export class SendMessageComponent implements OnInit {
 
   onSubmit(value) {
     this.messageService.sendMessage(value).subscribe(data => {
-      console.log(data);
+      this.router.navigate(['/messages']);
     });
   }
 }

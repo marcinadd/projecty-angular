@@ -4,6 +4,8 @@ import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute} from '@angular/router';
 import {Task} from '../../../models/Task';
 import {TaskStatus} from '../../../models/TaskStatus';
+import {MatDialog} from '@angular/material/dialog';
+import {AddTaskComponent} from '../add-task/add-task.component';
 
 @Component({
   selector: 'app-tasks',
@@ -14,16 +16,18 @@ export class TasksComponent implements OnInit {
   projectTasksData: ProjectTasksData;
   currentDate = new Date();
   taskStatuses = TaskStatus;
+  projectId = Number(this.route.snapshot.paramMap.get('id'));
 
   constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {
 
   }
 
   ngOnInit(): void {
-    this.taskService.getProjectTasksData(Number(this.route.snapshot.paramMap.get('id'))).subscribe(projectTasksData => {
+    this.taskService.getProjectTasksData(this.projectId).subscribe(projectTasksData => {
       this.projectTasksData = projectTasksData;
     });
   }
@@ -76,4 +80,22 @@ export class TasksComponent implements OnInit {
     }
   }
 
+  addTask(taskForm) {
+    this.taskService.createTask(taskForm, this.projectId).subscribe(task => {
+      this.projectTasksData.toDoTasks.push(task);
+    });
+  }
+
+  openAddTaskDialog() {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      width: '500px',
+      data: this.projectTasksData.project
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addTask(result);
+      }
+    });
+  }
 }

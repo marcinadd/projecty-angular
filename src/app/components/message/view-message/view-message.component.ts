@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from '../../../services/message.service';
 import {Message} from '../../../models/Message';
 
@@ -14,14 +14,16 @@ export class ViewMessageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.messageService.getMessage(this.messageId).subscribe(message => {
       this.message = message;
-      console.log(message);
+    }, () => {
+      this.router.navigate(['messages']);
     });
   }
 

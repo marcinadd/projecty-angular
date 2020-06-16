@@ -5,18 +5,13 @@
       <mat-list>
         <mat-list-item *ngFor="let projectRole of projectRoles">
           <h3 mat-line> {{projectRole.project.name}}</h3>
-          <a [routerLink]="['/projects/',projectRole.id,'tasks']" class="inheritColor">
+          <a [routerLink]="['/projects/',projectRole.project.id,'tasks']" class="inheritColor">
             <button mat-icon-button>
               <mat-icon>list</mat-icon>
             </button>
           </a>
           <ng-container *ngIf="projectRole.name === 'ADMIN'">
-            <a [routerLink]="['/projects/',projectRole.id,'tasks','add']" class="inheritColor">
-              <button mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button>
-            </a>
-            <a [routerLink]="['/projects/',projectRole.id]" class="inheritColor">
+            <a [routerLink]="['/projects/',projectRole.project.id]" class="inheritColor">
               <button mat-icon-button>
                 <mat-icon>settings</mat-icon>
               </button>
@@ -47,11 +42,6 @@
             </button>
           </a>
           <ng-container *ngIf="teamProject.role === 'MANAGER'">
-            <a [routerLink]="['/projects/',project.id,'tasks','add']" class="inheritColor">
-              <button mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button>
-            </a>
             <a [routerLink]="['/projects/',project.id]" class="inheritColor">
               <button mat-icon-button>
                 <mat-icon>settings</mat-icon>
