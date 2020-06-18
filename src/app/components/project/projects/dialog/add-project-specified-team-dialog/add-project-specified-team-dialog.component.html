@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Create new project for team {{team.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="projectCreateForm">
+    <mat-form-field>
+      <mat-label>Enter Name</mat-label>
+      <input formControlName="name" matInput type="text">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
+  <button [mat-dialog-close]="onYesClick()" cdkFocusInitial mat-button>Create</button>
+</mat-dialog-actions>

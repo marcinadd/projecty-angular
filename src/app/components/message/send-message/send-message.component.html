@@ -1,20 +1,26 @@
+<div>
+  <button [routerLink]="['/messages']" color="primary" mat-fab>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+<h1>Send new message</h1>
 <form (ngSubmit)="onSubmit(messageForm.value)" [formGroup]="messageForm">
   <div>
-    <mat-form-field>
+    <mat-form-field class="width50vw">
       <mat-label>Username</mat-label>
       <input formControlName="recipientUsername" matInput type="text">
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field class="width50vw">
       <mat-label>Subject</mat-label>
       <input formControlName="title" matInput type="text">
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field class="width50vw">
       <mat-label>Text</mat-label>
-      <input formControlName="text" matInput type="text">
+      <textarea cdkAutosizeMinRows="1" cdkTextareaAutosize formControlName="text" matInput type="text"></textarea>
     </mat-form-field>
   </div>
   <div>
