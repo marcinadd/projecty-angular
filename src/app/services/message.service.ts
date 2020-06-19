@@ -24,7 +24,7 @@ export class MessageService {
   }
 
   sendMessage(messageForm): Observable<Message> {
-    return this.http.post<Message>(this.apiMessageUrl, messageForm, environment.httpOptions);
+    return this.http.post<Message>(this.apiMessageUrl, messageForm);
   }
 
   getMessage(messageId: number): Observable<Message> {

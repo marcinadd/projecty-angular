@@ -4,7 +4,8 @@
   </button>
 </div>
 <h1>Send new message</h1>
-<form (ngSubmit)="onSubmit(messageForm.value)" [formGroup]="messageForm">
+<form (ngSubmit)="onSubmit(messageForm.value)" [formGroup]="messageForm" enctype="multipart/form-data">
+  <mat-icon>attach_file</mat-icon>
   <div>
     <mat-form-field class="width50vw">
       <mat-label>Username</mat-label>
@@ -22,6 +23,13 @@
       <mat-label>Text</mat-label>
       <textarea cdkAutosizeMinRows="1" cdkTextareaAutosize formControlName="text" matInput type="text"></textarea>
     </mat-form-field>
+  </div>
+  <div class="form-group">
+    <label for="file">Choose File</label>
+    <input (change)="handleFileInput($event.target.files)"
+           id="file"
+           multiple="true"
+           type="file">
   </div>
   <div>
     <button color="primary" mat-raised-button type="submit">Add</button>

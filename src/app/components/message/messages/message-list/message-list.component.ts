@@ -14,6 +14,7 @@ export class MessageListComponent implements OnInit {
   receivedMessages: Message[];
   displayedColumns: string[] = ['username', 'title', 'text', 'sendDate'];
   @Input() messageType: MessageType;
+  messageTypes = MessageType;
   pageSize = 5;
   pageLength = 0;
 

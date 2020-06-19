@@ -16,7 +16,10 @@
     <td *matCellDef="let message" mat-cell> {{message.sendDate | date:'dd.MM.yyyy HH:mm'}} </td>
   </ng-container>
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" class="pointer" mat-row></tr>
+  <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;"
+      [class.bold]="messageType === messageTypes.RECEIVED && row.seenDate === null" class="pointer"
+      mat-row>
+  </tr>
 </table>
 <mat-paginator (page)="onPageEvent($event)"
                [length]="pageLength"
