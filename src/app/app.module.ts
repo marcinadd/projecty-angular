@@ -49,6 +49,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MessageListComponent} from './components/message/messages/message-list/message-list.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {AddProjectSpecifiedTeamDialogComponent} from './components/project/projects/dialog/add-project-specified-team-dialog/add-project-specified-team-dialog.component';
+import {ChatComponent} from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {AddProjectSpecifiedTeamDialogComponent} from './components/project/proje
     ProjectRolesDialogComponent,
     AddProjectDialogComponent,
     MessageListComponent,
-    AddProjectSpecifiedTeamDialogComponent
+    AddProjectSpecifiedTeamDialogComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

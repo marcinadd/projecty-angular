@@ -15,6 +15,7 @@ import {TeamProjectsComponent} from './components/teams/team-projects/team-proje
 import {MessagesComponent} from './components/message/messages/messages.component';
 import {SendMessageComponent} from './components/message/send-message/send-message.component';
 import {ViewMessageComponent} from './components/message/view-message/view-message.component';
+import {ChatComponent} from './components/chat/chat.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'messages/send', component: SendMessageComponent, canActivate: [AuthGuard]},
   {path: 'messages/:id', component: ViewMessageComponent, canActivate: [AuthGuard]},
   {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
+  {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
 
   {path: 'login', component: LoginComponent},
   {path: '', component: IndexComponent},

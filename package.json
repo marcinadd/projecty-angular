@@ -25,6 +25,8 @@
     "angular-oauth2-oidc": "^9.2.2",
     "file-saver": "^2.0.2",
     "rxjs": "~6.5.4",
+    "sockjs": "^0.3.20",
+    "stompjs": "^2.3.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

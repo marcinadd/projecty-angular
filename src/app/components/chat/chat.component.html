@@ -1,0 +1,7 @@
+<p>chat works!</p>
+<form (ngSubmit)="onSendMessage(newChatMessageForm.value)" [formGroup]="newChatMessageForm">
+  <input formControlName="recipient" type="text">
+  <input formControlName="text" type="text">
+  <button type="submit">Send</button>
+
+</form>
