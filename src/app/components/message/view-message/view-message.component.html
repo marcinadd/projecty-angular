@@ -14,4 +14,12 @@
       {{message.text}}
     </p>
   </span>
+  <p><b>Attachments</b></p>
+  <mat-list role="list">
+    <mat-list-item (click)="onAttachmentDownload(attachment)" *ngFor="let attachment of message.attachments"
+                   role="listitem">
+      {{attachment.fileName}}
+    </mat-list-item>
+  </mat-list>
+
 </div>

@@ -1,4 +1,5 @@
 import {User} from './User';
+import {Attachment} from './Attachment';
 
 export class Message {
   id: number;
@@ -8,4 +9,5 @@ export class Message {
   seenDate: Date;
   title: string;
   text: string;
+  attachments: Attachment[];
 }
