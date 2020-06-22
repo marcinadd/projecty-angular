@@ -7,5 +7,4 @@ export class ChatMessage {
   sendDate: Date;
   seenDate: Date;
   text: string;
-  anotherUserUsername: string;
 }

@@ -5,8 +5,9 @@ import {FormBuilder} from '@angular/forms';
 import {ChatService} from '../../services/chat.service';
 import {ChatHistoryData} from '../../models/ChatHistoryData';
 import {AuthService} from '../../services/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChatMessage} from '../../models/ChatMessage';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -17,8 +18,10 @@ export class ChatComponent implements OnInit {
   chatHistoryData: ChatHistoryData[];
   currentUserUsername = this.authService.getUsername();
   chatWithUsername;
-  chatMessages: ChatMessage[];
+  chatMessages: ChatMessage[] = [];
   newChatMessageForm;
+  newChatMessageText = '';
+  subscription: Subscription;
 
   constructor(
     private oAuthService: OAuthService,
@@ -26,7 +29,8 @@ export class ChatComponent implements OnInit {
     private chatService: ChatService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.newChatMessageForm = this.formBuilder.group({
       recipient: '',
@@ -34,17 +38,24 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  static onMessageReceived(stompMessage) {
-    const chatMessage = JSON.parse(stompMessage.body);
-    console.log(chatMessage);
+  onMessageReceived(chatMessage) {
+    if (chatMessage !== null) {
+      if (chatMessage.sender.username === this.chatWithUsername) {
+        this.chatMessages.unshift(chatMessage);
+      }
+    }
   }
 
-  onSendMessage(chatMessageForm) {
-    this.chatSocketService.sendMessage(chatMessageForm.recipient, chatMessageForm.text);
+  onSendMessage() {
+    this.chatSocketService.sendMessage(this.chatWithUsername, this.newChatMessageText);
   }
 
   ngOnInit(): void {
-    this.chatSocketService.connect(ChatComponent.onMessageReceived);
+    this.subscription = this.chatSocketService.chatMessage.subscribe(chatMessage => {
+      this.onMessageReceived(chatMessage);
+    });
+    this.chatSocketService.connect();
+
     this.loadChatHistory();
     this.route.queryParams.subscribe(params => {
       this.chatWithUsername = params['with'];
@@ -57,23 +68,28 @@ export class ChatComponent implements OnInit {
   loadChatHistory() {
     this.chatService.getChatHistory().subscribe(chatHistoryData => {
       this.chatHistoryData = chatHistoryData;
-      this.chatHistoryData.forEach(chatMessage => this.setAnotherUserUsername(chatMessage.lastMessage));
+      this.chatHistoryData.forEach(chatMessage => this.setAnotherUserUsername(chatMessage));
     });
   }
 
   loadChatMessages(username: string) {
     this.chatService.getChatMessages(username).subscribe(chatMessages => {
       this.chatMessages = chatMessages.content;
-      this.chatMessages.forEach(chatMessage => this.setAnotherUserUsername(chatMessage));
     });
   }
 
-  setAnotherUserUsername(chatMessage: ChatMessage) {
-    if (chatMessage.recipient.username !== this.currentUserUsername) {
-      chatMessage.anotherUserUsername = chatMessage.recipient.username;
+  setAnotherUserUsername(chatHistoryData: ChatHistoryData) {
+    if (chatHistoryData.lastMessage.recipient.username !== this.currentUserUsername) {
+      chatHistoryData.anotherUserUsername = chatHistoryData.lastMessage.recipient.username;
     } else {
-      chatMessage.anotherUserUsername = chatMessage.sender.username;
+      chatHistoryData.anotherUserUsername = chatHistoryData.lastMessage.sender.username;
     }
   }
 
+  onChatSelected(chatData: ChatHistoryData) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {with: chatData.anotherUserUsername},
+    });
+  }
 }

@@ -1,45 +1,40 @@
 import {Injectable} from '@angular/core';
-import {OAuthService} from 'angular-oauth2-oidc';
 import {environment} from '../../environments/environment';
-import {UserService} from './user.service';
-
-declare var SockJS;
-declare var Stomp;
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ChatHistoryData} from '../models/ChatHistoryData';
+import {Page} from '../models/Page';
+import {ChatMessage} from '../models/ChatMessage';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  stompClient;
 
-  constructor(private oauthService: OAuthService, private userService: UserService) {
+  apiChatUrl = environment.apiUrl + '/chat';
 
+  constructor(private http: HttpClient) {
   }
 
-  connect(onMessageReceived) {
-    const endpoint = environment.chatUrl + '?access_token=' + this.oauthService.getAccessToken();
-    const socket = new SockJS(endpoint);
-    this.stompClient = Stomp.over(socket);
-    let sessionId = '';
-    const that = this;
-    this.stompClient.connect({}, function(frame) {
-      console.log(that.stompClient.ws._transport.url);
-      let url = that.stompClient.ws._transport.url;
-      url = url.replace(
-        'ws://localhost:8080/secured/room/', '');
-      url = url.replace('/websocket', '');
-      url = url.replace(/^[0-9]+\//, '');
-      url = url.replace(/\?.*/, '');
-      console.log('Your current session is: ' + url);
-      sessionId = url;
-
-      that.stompClient.subscribe('/secured/user/queue/specific-user'
-        + '-user' + sessionId, onMessageReceived);
-    });
+  getChatHistory(): Observable<ChatHistoryData[]> {
+    return this.http.get<ChatHistoryData[]>(this.apiChatUrl);
   }
 
-  sendMessage(recipient: string, text: string) {
-    this.stompClient.send('/spring-security-mvc-socket/secured/room', {},
-      JSON.stringify({'sender': 'Sender', 'recipient': recipient, 'text': text}));
+  getChatMessages(username: string): Observable<Page<ChatMessage>> {
+    return this.http.get<Page<ChatMessage>>(this.apiChatUrl + '/' + username);
+  }
+
+  createChatMessageFromSocketChatMessage(socketChatMessage): ChatMessage {
+    const chatMessage = new ChatMessage();
+    const sender = new User();
+    const recipient = new User();
+    sender.username = socketChatMessage.sender;
+    recipient.username = socketChatMessage.recipient;
+    chatMessage.sender = sender;
+    chatMessage.recipient = recipient;
+    chatMessage.text = socketChatMessage.text;
+    chatMessage.sendDate = socketChatMessage.sendDate;
+    return chatMessage;
   }
 }
