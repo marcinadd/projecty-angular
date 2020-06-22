@@ -69,13 +69,13 @@ img {
   margin: 0 0 0 -27px;
 }
 
-.chat_ib h5 {
+.chat_ib .chat_people_header {
   font-size: 15px;
   color: #464646;
   margin: 0 0 8px 0;
 }
 
-.chat_ib h5 span {
+.chat_ib .chat_people_header span {
   font-size: 13px;
   float: right;
 }
@@ -210,5 +210,5 @@ img {
 
 .msg_history {
   height: 516px;
-  overflow-y: auto;
+  overflow-y: scroll;
 }

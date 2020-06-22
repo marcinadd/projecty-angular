@@ -19,7 +19,6 @@ export class ChatComponent implements OnInit {
   currentUserUsername = this.authService.getUsername();
   chatWithUsername;
   chatMessages: ChatMessage[] = [];
-  newChatMessageForm;
   newChatMessageText = '';
   subscription: Subscription;
 
@@ -32,22 +31,26 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.newChatMessageForm = this.formBuilder.group({
-      recipient: '',
-      text: '',
-    });
   }
 
   onMessageReceived(chatMessage) {
     if (chatMessage !== null) {
       if (chatMessage.sender.username === this.chatWithUsername) {
         this.chatMessages.unshift(chatMessage);
+        this.updateLastMessageInChatHistory(chatMessage, false);
+      } else {
+        this.updateLastMessageInChatHistory(chatMessage);
       }
     }
   }
 
   onSendMessage() {
     this.chatSocketService.sendMessage(this.chatWithUsername, this.newChatMessageText);
+    const chatMessage = ChatService.createChatMessage(
+      this.currentUserUsername, this.chatWithUsername, this.newChatMessageText, new Date()
+    );
+    this.chatMessages.unshift(chatMessage);
+    this.updateLastMessageInChatHistory(chatMessage, false);
   }
 
   ngOnInit(): void {
@@ -58,7 +61,7 @@ export class ChatComponent implements OnInit {
 
     this.loadChatHistory();
     this.route.queryParams.subscribe(params => {
-      this.chatWithUsername = params['with'];
+      this.chatWithUsername = params.with;
       if (this.chatWithUsername !== undefined) {
         this.loadChatMessages(this.chatWithUsername);
       }
@@ -79,11 +82,21 @@ export class ChatComponent implements OnInit {
   }
 
   setAnotherUserUsername(chatHistoryData: ChatHistoryData) {
-    if (chatHistoryData.lastMessage.recipient.username !== this.currentUserUsername) {
-      chatHistoryData.anotherUserUsername = chatHistoryData.lastMessage.recipient.username;
-    } else {
-      chatHistoryData.anotherUserUsername = chatHistoryData.lastMessage.sender.username;
+    chatHistoryData.anotherUserUsername = ChatService.getAnotherUserUsername(chatHistoryData.lastMessage, this.currentUserUsername);
+  }
+
+  updateLastMessageInChatHistory(chatMessage: ChatMessage, incrementUnreadCounter: boolean = true) {
+    const anotherUserUsername = ChatService.getAnotherUserUsername(chatMessage, this.currentUserUsername);
+    for (const chatHistory of this.chatHistoryData) {
+      if (chatHistory.anotherUserUsername === anotherUserUsername) {
+        chatHistory.lastMessage = chatMessage;
+        if (incrementUnreadCounter) {
+          chatHistory.unreadMessageCount += 1;
+        }
+        return;
+      }
     }
+    this.chatHistoryData.push(ChatService.createNewChatHistoryData(chatMessage, anotherUserUsername));
   }
 
   onChatSelected(chatData: ChatHistoryData) {

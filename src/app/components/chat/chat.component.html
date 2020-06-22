@@ -19,14 +19,19 @@
         <div class="inbox_chat">
 
           <div (click)="onChatSelected(chatData)" *ngFor="let chatData of chatHistoryData"
-               [class.active_chat]="chatData.anotherUserUsername === chatWithUsername" class="chat_list">
+               [class.active_chat]="chatData.anotherUserUsername === chatWithUsername"
+               [class.bold]="chatData.unreadMessageCount > 0"
+               class="chat_list">
             <div class="chat_people">
               <div class="chat_img"><img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"></div>
               <div class="chat_ib">
-                <h5>
+                <p class="chat_people_header">
+                  <ng-container *ngIf="chatData.unreadMessageCount > 0">
+                    ({{chatData.unreadMessageCount}})
+                  </ng-container>
                   {{chatData.anotherUserUsername}}
                   <span class="chat_date">{{chatData.lastMessage.sendDate|date}}</span>
-                </h5>
+                </p>
                 <p>{{chatData.lastMessage.text}}</p>
               </div>
             </div>
@@ -35,7 +40,6 @@
       </div>
       <div class="mesgs">
         <div class="msg_history">
-
           <ng-container *ngFor="let chatMessage of chatMessages.slice().reverse()">
             <ng-container *ngIf="chatMessage.sender.username === currentUserUsername; else incoming">
               <div class="outgoing_msg">
