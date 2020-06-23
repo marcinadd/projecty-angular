@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {ChatSocketService} from '../../services/chat-socket.service';
 import {FormBuilder} from '@angular/forms';
@@ -8,13 +8,15 @@ import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChatMessage} from '../../models/ChatMessage';
 import {Subscription} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @ViewChild('msgHistory') msgHistory: ElementRef;
   chatHistoryData: ChatHistoryData[];
   currentUserUsername = this.authService.getUsername();
   chatWithUsername;
@@ -51,6 +53,7 @@ export class ChatComponent implements OnInit {
     );
     this.chatMessages.unshift(chatMessage);
     this.updateLastMessageInChatHistory(chatMessage, false);
+    this.newChatMessageText = '';
   }
 
   ngOnInit(): void {
@@ -66,6 +69,7 @@ export class ChatComponent implements OnInit {
         this.loadChatMessages(this.chatWithUsername);
       }
     });
+    this.scrollToBottom();
   }
 
   loadChatHistory() {
@@ -78,6 +82,7 @@ export class ChatComponent implements OnInit {
   loadChatMessages(username: string) {
     this.chatService.getChatMessages(username).subscribe(chatMessages => {
       this.chatMessages = chatMessages.content;
+      ChatService.resetUnreadMessageCounterForUsername(username, this.chatHistoryData);
     });
   }
 
@@ -104,5 +109,25 @@ export class ChatComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {with: chatData.anotherUserUsername},
     });
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.msgHistory.nativeElement.scrollTop = this.msgHistory.nativeElement.scrollHeight;
+    } catch (e) {
+
+    }
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  onChatMessagesScrolled(event: any) {
+    if (event.target.scrollTop === 0) {
+      this.chatService.getChatMessages(this.chatWithUsername, this.chatMessages.length, environment.message_buffer).subscribe(data => {
+        this.chatMessages.push(...data.content);
+      });
+    }
   }
 }

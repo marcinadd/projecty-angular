@@ -45,11 +45,22 @@ export class ChatService {
     return chatMessage;
   }
 
+  static resetUnreadMessageCounterForUsername(username: string, chatHistoryData: ChatHistoryData[]): boolean {
+    for (const chatData of chatHistoryData) {
+      if (chatData.anotherUserUsername === username) {
+        chatData.unreadMessageCount = 0;
+        return true;
+      }
+    }
+    return false;
+  }
+
   getChatHistory(): Observable<ChatHistoryData[]> {
     return this.http.get<ChatHistoryData[]>(this.apiChatUrl);
   }
 
-  getChatMessages(username: string): Observable<Page<ChatMessage>> {
-    return this.http.get<Page<ChatMessage>>(this.apiChatUrl + '/' + username);
+  getChatMessages(username: string, offsetParam: number = 0, limitParam: number = 10): Observable<Page<ChatMessage>> {
+    const data = {offset: String(offsetParam), limit: String(limitParam)};
+    return this.http.get<Page<ChatMessage>>(this.apiChatUrl + '/' + username, {params: data});
   }
 }

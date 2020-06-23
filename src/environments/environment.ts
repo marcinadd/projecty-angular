@@ -23,7 +23,8 @@ export const environment = {
     showDebugInformation: true,
     requireHttps: false,
     useSilentRefresh: true
-  })
+  }),
+  message_buffer: 10
 };
 
 /*
