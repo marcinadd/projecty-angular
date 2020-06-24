@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {ChatSocketService} from '../../services/chat-socket.service';
 import {FormBuilder} from '@angular/forms';
@@ -15,7 +15,7 @@ import {environment} from '../../../environments/environment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit {
   @ViewChild('msgHistory') msgHistory: ElementRef;
   chatHistoryData: ChatHistoryData[];
   currentUserUsername = this.authService.getUsername();
@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.updateLastMessageInChatHistory(chatMessage);
       }
     }
+    this.scrollToBottom();
   }
 
   onSendMessage() {
@@ -75,7 +76,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   loadChatHistory() {
     this.chatService.getChatHistory().subscribe(chatHistoryData => {
       this.chatHistoryData = chatHistoryData;
-      this.chatHistoryData.forEach(chatMessage => this.setAnotherUserUsername(chatMessage));
+      this.chatHistoryData.forEach(chatMessage => this.prepareChatHistoryData(chatMessage));
     });
   }
 
@@ -86,8 +87,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  setAnotherUserUsername(chatHistoryData: ChatHistoryData) {
+  prepareChatHistoryData(chatHistoryData: ChatHistoryData) {
     chatHistoryData.anotherUserUsername = ChatService.getAnotherUserUsername(chatHistoryData.lastMessage, this.currentUserUsername);
+    chatHistoryData.lastMessage.sendDate = new Date(chatHistoryData.lastMessage.sendDate);
   }
 
   updateLastMessageInChatHistory(chatMessage: ChatMessage, incrementUnreadCounter: boolean = true) {
@@ -119,15 +121,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-
   onChatMessagesScrolled(event: any) {
     if (event.target.scrollTop === 0) {
       this.chatService.getChatMessages(this.chatWithUsername, this.chatMessages.length, environment.message_buffer).subscribe(data => {
         this.chatMessages.push(...data.content);
+        event.target.scrollTop = 30 * data.content.length;
       });
     }
+  }
+
+  onTextTyping() {
+    this.scrollToBottom();
   }
 }
