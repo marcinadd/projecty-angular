@@ -1,0 +1,18 @@
+<div *ngIf="notifications.length>0; else elseBlock">
+  <mat-list>
+    <div mat-subheader>Notifications</div>
+    <mat-list-item *ngFor="let notification of notifications">
+      <mat-icon mat-list-icon>info</mat-icon>
+      <div mat-line>{{notification.stringValue}}</div>
+      <div mat-line> {{notification.date | date}} </div>
+      <button mat-icon-button>
+        <mat-icon class="mat-24">close</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
+<ng-template #elseBlock>
+  No notifications!
+</ng-template>
+
+

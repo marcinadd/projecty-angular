@@ -51,6 +51,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {AddProjectSpecifiedTeamDialogComponent} from './components/project/projects/dialog/add-project-specified-team-dialog/add-project-specified-team-dialog.component';
 import {ChatComponent} from './components/chat/chat.component';
 import {SortByPipe} from './pipes/sort-by.pipe';
+import {NotificationsComponent} from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {SortByPipe} from './pipes/sort-by.pipe';
     MessageListComponent,
     AddProjectSpecifiedTeamDialogComponent,
     ChatComponent,
-    SortByPipe
+    SortByPipe,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
