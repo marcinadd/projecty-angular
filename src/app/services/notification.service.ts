@@ -16,4 +16,12 @@ export class NotificationService {
   getNotifications(): Observable<Notification[]> {
     return this.http.get<Notification[]>(this.apiNotificationsUrl);
   }
+
+  getUnseenNotificationCount(): Observable<number> {
+    return this.http.get<number>(this.apiNotificationsUrl + '/unseenCount');
+  }
+
+  deleteNotification(notificationId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiNotificationsUrl}/${notificationId}`);
+  }
 }

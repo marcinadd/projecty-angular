@@ -5,7 +5,7 @@
       <mat-icon mat-list-icon>info</mat-icon>
       <div mat-line>{{notification.stringValue}}</div>
       <div mat-line> {{notification.date | date}} </div>
-      <button mat-icon-button>
+      <button (click)="onDelete(notification)" mat-icon-button>
         <mat-icon class="mat-24">close</mat-icon>
       </button>
     </mat-list-item>

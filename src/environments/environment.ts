@@ -9,6 +9,8 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
   chatUrl: 'http://localhost:8080/secured/room',
+  notificationsUrl: 'http://localhost:8080/secured/notifications',
+  subscribeUserEndpoint: '/secured/user/queue/specific-user',
   httpOptions: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

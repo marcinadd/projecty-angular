@@ -8,7 +8,7 @@ import {Notification} from '../../models/Notification';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
-  notifications: Notification[];
+  notifications: Notification[] = [];
 
   constructor(private notificationService: NotificationService) {
 
@@ -17,6 +17,12 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.notificationService.getNotifications().subscribe(notifications => {
       this.notifications = notifications;
+    });
+  }
+
+  onDelete(notification: Notification) {
+    this.notificationService.deleteNotification(notification.id).subscribe(() => {
+      this.notifications = this.notifications.filter(n => n.id !== notification.id);
     });
   }
 }

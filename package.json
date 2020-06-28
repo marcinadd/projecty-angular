@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.0",
     "@auth0/angular-jwt": "^4.1.2",
     "angular-oauth2-oidc": "^9.2.2",
+    "angular2-notifications": "^9.0.0",
     "file-saver": "^2.0.2",
     "lodash": "^4.17.15",
     "rxjs": "~6.5.4",

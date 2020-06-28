@@ -66,10 +66,23 @@
         <!--        </li>-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle user-action" data-toggle="dropdown" href="#">
-            <img class="avatar" id="avatar"/>{{getUsername()}}<b class="caret"></b>
+            <img class="avatar" id="avatar" src="https://ptetutorials.com/images/user-profile.png"/>
+            <b class="caret">
+              <span *ngIf="unseenNotificationsCounter>0" class="text-warning">({{unseenNotificationsCounter}}
+                )&nbsp;</span>
+              <span>{{getUsername()}}</span>
+            </b>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="fa fa-user-o"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa fa-user-o"></i>Profile</a></li>
+            <li>
+              <a [routerLink]="['/notifications']" class="dropdown-item">
+                <i class="fa fa-bell"></i>
+                <span *ngIf="unseenNotificationsCounter>0" class="text-warning">({{unseenNotificationsCounter}}
+                  )&nbsp;</span>
+                Notifications
+              </a>
+            </li>
             <li>
               <i class="fa fa-sliders"></i>
               Settings
