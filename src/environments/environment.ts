@@ -11,6 +11,7 @@ export const environment = {
   chatUrl: 'http://localhost:8080/secured/room',
   notificationsUrl: 'http://localhost:8080/secured/notifications',
   subscribeUserEndpoint: '/secured/user/queue/specific-user',
+  subscribeNotificationsEndpoint: '/secured/user/queue/notifications',
   httpOptions: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

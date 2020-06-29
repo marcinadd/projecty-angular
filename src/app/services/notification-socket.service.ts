@@ -16,10 +16,12 @@ export class NotificationSocketService {
   }
 
   connectAndSubscribe() {
-    this.socketService.connectAndSubscribe(environment.notificationsUrl, environment.subscribeUserEndpoint);
+    this.socketService.connectAndSubscribe(environment.notificationsUrl, environment.subscribeNotificationsEndpoint);
     this.subscription = this.socketService.message.subscribe(message => {
       const notification = JSON.parse(message);
-      this.notificationMessageSource.next(notification);
+      if (notification instanceof Notification) {
+        this.notificationMessageSource.next(notification);
+      }
     });
   }
 }

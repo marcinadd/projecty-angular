@@ -37,4 +37,9 @@ export class SocketService {
       });
     });
   }
+
+  send(recipient: string, message: string) {
+    this.stompClient.send('/spring-security-mvc-socket/secured/room', {},
+      JSON.stringify({'recipient': recipient, 'text': message}));
+  }
 }

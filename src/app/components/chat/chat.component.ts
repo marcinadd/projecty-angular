@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit {
     this.subscription = this.chatSocketService.chatMessage.subscribe(chatMessage => {
       this.onMessageReceived(chatMessage);
     });
-    this.chatSocketService.connect();
+    this.chatSocketService.connectAndSubscribe();
 
     this.loadChatHistory();
     this.route.queryParams.subscribe(params => {
