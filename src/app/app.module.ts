@@ -52,6 +52,7 @@ import {AddProjectSpecifiedTeamDialogComponent} from './components/project/proje
 import {ChatComponent} from './components/chat/chat.component';
 import {SortByPipe} from './pipes/sort-by.pipe';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
     MatTableModule,
     MatPaginatorModule,
     MatAutocompleteModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

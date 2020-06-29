@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
 import {NotificationSocketService} from '../../services/notification-socket.service';
 import {Notification} from '../../models/Notification';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private notificationService: NotificationService,
-    private notificationSocketService: NotificationSocketService
+    private notificationSocketService: NotificationSocketService,
+    private notificationsToastService: NotificationsService
   ) {
   }
 
@@ -42,7 +44,9 @@ export class NavbarComponent implements OnInit {
   }
 
   handleIncomingNotification(notification: Notification) {
-    this.unseenNotificationsCounter++;
-    //TODO Show notification
+    if (notification !== null) {
+      this.unseenNotificationsCounter++;
+      this.notificationsToastService.info('Notification', notification.stringValue, null);
+    }
   }
 }
