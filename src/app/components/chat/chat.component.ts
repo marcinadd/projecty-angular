@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OAuthService} from 'angular-oauth2-oidc';
-import {ChatSocketService} from '../../services/chat-socket.service';
 import {FormBuilder} from '@angular/forms';
 import {ChatService} from '../../services/chat.service';
 import {ChatHistoryData} from '../../models/ChatHistoryData';
@@ -9,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ChatMessage} from '../../models/ChatMessage';
 import {Subscription} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -26,7 +26,7 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private oAuthService: OAuthService,
-    private chatSocketService: ChatSocketService,
+    private socketService: SocketService,
     private chatService: ChatService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
   }
 
   onSendMessage() {
-    this.chatSocketService.sendMessage(this.chatWithUsername, this.newChatMessageText);
+    this.socketService.send(this.chatWithUsername, this.newChatMessageText);
     const chatMessage = ChatService.createChatMessage(
       this.currentUserUsername, this.chatWithUsername, this.newChatMessageText, new Date()
     );
@@ -58,10 +58,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.chatSocketService.chatMessage.subscribe(chatMessage => {
-      this.onMessageReceived(chatMessage);
+    this.subscription = this.socketService.message.subscribe(message => {
+      if (message != null) {
+        this.onStompMessageReceived(message);
+      }
     });
-    this.chatSocketService.connectAndSubscribe();
 
     this.loadChatHistory();
     this.route.queryParams.subscribe(params => {
@@ -71,6 +72,13 @@ export class ChatComponent implements OnInit {
       }
     });
     this.scrollToBottom();
+  }
+
+  onStompMessageReceived(message: string) {
+    const parsedMessage = JSON.parse(message);
+    if (parsedMessage.sender !== undefined) {
+      this.onMessageReceived(parsedMessage);
+    }
   }
 
   loadChatHistory() {
