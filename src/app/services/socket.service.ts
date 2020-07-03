@@ -21,16 +21,15 @@ export class SocketService {
     const endpoint = socketUrl + '?access_token=' + this.oauthService.getAccessToken();
     const socket = new SockJS(endpoint);
     this.stompClient = Stomp.over(socket);
+    this.stompClient.reconnect_delay = 5000;
     const that = this;
     this.stompClient.connect({}, function(frame) {
-      console.log(that.stompClient.ws._transport.url);
       let url = that.stompClient.ws._transport.url;
       socketUrl = socketUrl.replace('http', 'ws');
       url = url.replace(socketUrl + '/', '');
       url = url.replace('/websocket', '');
       url = url.replace(/^[0-9]+\//, '');
       url = url.replace(/\?.*/, '');
-      console.log('Your current session is: ' + url);
       that.sessionId = url;
       that.stompClient.subscribe(subscribeEndpoint + '-user' + that.sessionId, response => {
         that.messageSource.next(response.body);

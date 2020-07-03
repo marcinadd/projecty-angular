@@ -43,7 +43,6 @@ export class NavbarComponent implements OnInit {
     this.socketService.message.subscribe(message => {
       const parsedMessage = JSON.parse(message);
       if (parsedMessage != null) {
-        console.log(parsedMessage);
         if (parsedMessage.sender !== undefined) {
           this.handleIncomingChatMessage(parsedMessage);
         } else {
