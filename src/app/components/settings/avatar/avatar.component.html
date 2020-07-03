@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="file">Choose File</label>
+    <input (change)="handleFileInput($event.target.files)"
+           id="file"
+           type="file">
+  </div>
+  <div>
+    <button color="primary" mat-raised-button type="submit">Add</button>
+  </div>
+</form>

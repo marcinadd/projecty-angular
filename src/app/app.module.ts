@@ -53,6 +53,8 @@ import {ChatComponent} from './components/chat/chat.component';
 import {SortByPipe} from './pipes/sort-by.pipe';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {SimpleNotificationsModule} from 'angular2-notifications';
+import {SettingsComponent} from './components/settings/settings.component';
+import {AvatarComponent} from './components/settings/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,9 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     AddProjectSpecifiedTeamDialogComponent,
     ChatComponent,
     SortByPipe,
-    NotificationsComponent
+    NotificationsComponent,
+    SettingsComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,

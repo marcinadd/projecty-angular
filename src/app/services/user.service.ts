@@ -8,12 +8,21 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-  apiUserUrl = environment.apiUrl + '/users';
+  apiUsersUrl = environment.apiUrl + '/users';
+  apiUserUrl = environment.apiUrl + '/user';
 
   constructor(private http: HttpClient) {
   }
 
   getUsernamesStartWith(usernameStartsWith: string): Observable<string[]> {
-    return this.http.get<string[]>(this.apiUserUrl + '/usernames?usernameStartsWith=' + usernameStartsWith);
+    return this.http.get<string[]>(this.apiUsersUrl + '/usernames?usernameStartsWith=' + usernameStartsWith);
+  }
+
+  uploadAvatar(avatar): Observable<any> {
+    return this.http.post<any>(this.apiUserUrl + '/avatar', avatar);
+  }
+
+  getAvatar(username: string) {
+    return this.http.get<any>(`${this.apiUserUrl}/user/${username}/avatar`);
   }
 }

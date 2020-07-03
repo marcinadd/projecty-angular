@@ -17,6 +17,7 @@ import {SendMessageComponent} from './components/message/send-message/send-messa
 import {ViewMessageComponent} from './components/message/view-message/view-message.component';
 import {ChatComponent} from './components/chat/chat.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {SettingsComponent} from './components/settings/settings.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
   {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
   {path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
 
   {path: 'login', component: LoginComponent},
   {path: '', component: IndexComponent},
