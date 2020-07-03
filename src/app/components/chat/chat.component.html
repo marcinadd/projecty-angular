@@ -15,7 +15,8 @@
                [class.bold]="chatData.unreadMessageCount > 0"
                class="chat_list">
             <div class="chat_people">
-              <div class="chat_img"><img alt="sunil" src="https://ptetutorials.com/images/user-profile.png"></div>
+              <div class="chat_img"><img [alt]="chatData.anotherUserUsername"
+                                         [src]="chatData.avatar !== undefined? chatData.avatar: defaultAvatarUrl"></div>
               <div class="chat_ib">
                 <p class="chat_people_header">
                   <ng-container *ngIf="chatData.unreadMessageCount > 0">

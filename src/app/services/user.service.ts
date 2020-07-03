@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {FileService} from './file.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
   apiUsersUrl = environment.apiUrl + '/users';
   apiUserUrl = environment.apiUrl + '/user';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private fileService: FileService) {
   }
 
   getUsernamesStartWith(usernameStartsWith: string): Observable<string[]> {
@@ -23,6 +24,6 @@ export class UserService {
   }
 
   getAvatar(username: string) {
-    return this.http.get<any>(`${this.apiUserUrl}/user/${username}/avatar`);
+    return this.fileService.getFileAsBlob(`${this.apiUserUrl}/${username}/avatar`);
   }
 }

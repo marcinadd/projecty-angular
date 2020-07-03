@@ -6,6 +6,8 @@ import {NotificationsService} from 'angular2-notifications';
 import {ChatMessage} from '../../models/ChatMessage';
 import {environment} from '../../../environments/environment';
 import {SocketService} from '../../services/socket.service';
+import {UserService} from '../../services/user.service';
+import {FileService} from '../../services/file.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,12 +16,15 @@ import {SocketService} from '../../services/socket.service';
 })
 export class NavbarComponent implements OnInit {
   unseenNotificationsCounter = 0;
+  avatar: any = environment.defaultAvatarUrl;
 
   constructor(
     private authService: AuthService,
     private notificationService: NotificationService,
     private notificationsToastService: NotificationsService,
-    private socketService: SocketService
+    private socketService: SocketService,
+    private userService: UserService,
+    private fileService: FileService
   ) {
   }
 
@@ -28,6 +33,7 @@ export class NavbarComponent implements OnInit {
       this.unseenNotificationsCounter = unreadNotificationCounter;
     });
     this.handleWebsocketMessages();
+    this.getAvatar();
   }
 
   isLoggedIn() {
@@ -67,5 +73,16 @@ export class NavbarComponent implements OnInit {
         timeout: 5000
       });
     }
+  }
+
+  getAvatar() {
+    const that = this;
+    this.userService.getAvatar(this.getUsername()).subscribe(blob => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        that.avatar = reader.result;
+      };
+    });
   }
 }

@@ -12,6 +12,7 @@ export const environment = {
   notificationsUrl: 'http://localhost:8080/secured/notifications',
   subscribeUserEndpoint: '/secured/user/queue/specific-user',
   subscribeNotificationsEndpoint: '/secured/user/queue/notifications',
+  defaultAvatarUrl: 'https://ptetutorials.com/images/user-profile.png',
   httpOptions: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

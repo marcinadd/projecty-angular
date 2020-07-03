@@ -59,10 +59,9 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle user-action" data-toggle="dropdown" href="#">
-            <img class="avatar" id="avatar" src="https://ptetutorials.com/images/user-profile.png"/>
+            <img [src]="avatar" class="avatar" id="avatar"/>
             <b class="caret">
-              <span *ngIf="unseenNotificationsCounter>0" class="text-warning">({{unseenNotificationsCounter}}
-                )&nbsp;</span>
+              <span *ngIf="unseenNotificationsCounter>0" class="text-warning">({{unseenNotificationsCounter}})</span>
               <span>{{getUsername()}}</span>
             </b>
           </a>

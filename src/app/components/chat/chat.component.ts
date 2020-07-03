@@ -9,6 +9,7 @@ import {ChatMessage} from '../../models/ChatMessage';
 import {Subscription} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {SocketService} from '../../services/socket.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -23,6 +24,7 @@ export class ChatComponent implements OnInit {
   chatMessages: ChatMessage[] = [];
   newChatMessageText = '';
   subscription: Subscription;
+  defaultAvatarUrl = environment.defaultAvatarUrl;
 
   constructor(
     private oAuthService: OAuthService,
@@ -30,6 +32,7 @@ export class ChatComponent implements OnInit {
     private chatService: ChatService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -84,7 +87,18 @@ export class ChatComponent implements OnInit {
   loadChatHistory() {
     this.chatService.getChatHistory().subscribe(chatHistoryData => {
       this.chatHistoryData = chatHistoryData;
-      this.chatHistoryData.forEach(chatMessage => this.prepareChatHistoryData(chatMessage));
+      this.chatHistoryData.forEach(chatHistoryEl => this.prepareChatHistoryData(chatHistoryEl));
+      this.chatHistoryData.forEach(chatHistoryEl => this.getAvatar(chatHistoryEl));
+    });
+  }
+
+  getAvatar(chatHistoryDataEl: ChatHistoryData) {
+    this.userService.getAvatar(chatHistoryDataEl.anotherUserUsername).subscribe(blob => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        chatHistoryDataEl.avatar = reader.result;
+      };
     });
   }
 

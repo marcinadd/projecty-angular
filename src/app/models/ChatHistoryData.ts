@@ -4,4 +4,5 @@ export class ChatHistoryData {
   lastMessage: ChatMessage;
   unreadMessageCount: number;
   anotherUserUsername: string;
+  avatar: any;
 }
