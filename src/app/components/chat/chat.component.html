@@ -15,8 +15,11 @@
                [class.bold]="chatData.unreadMessageCount > 0"
                class="chat_list">
             <div class="chat_people">
-              <div class="chat_img"><img [alt]="chatData.anotherUserUsername"
-                                         [src]="chatData.avatar !== undefined? chatData.avatar: defaultAvatarUrl"></div>
+              <div class="chat_img">
+                <img [alt]="chatData.anotherUserUsername"
+                     [src]="chatData.avatar !== undefined? chatData.avatar: defaultAvatarUrl"
+                     class="avatar">
+              </div>
               <div class="chat_ib">
                 <p class="chat_people_header">
                   <ng-container *ngIf="chatData.unreadMessageCount > 0">
@@ -43,7 +46,8 @@
             </ng-container>
             <ng-template #incoming>
               <div class="incoming_msg">
-                <div class="incoming_msg_img"><img alt="sunil" src="https://ptetutorials.com/images/user-profile.png">
+                <div class="incoming_msg_img"><img
+                  [src]="anotherUserAvatar !== undefined? anotherUserAvatar: defaultAvatarUrl" class="avatar">
                 </div>
                 <div class="received_msg">
                   <div class="received_withd_msg">

@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit {
   chatMessages: ChatMessage[] = [];
   newChatMessageText = '';
   subscription: Subscription;
+  anotherUserAvatar;
   defaultAvatarUrl = environment.defaultAvatarUrl;
 
   constructor(
@@ -72,6 +73,7 @@ export class ChatComponent implements OnInit {
       this.chatWithUsername = params.with;
       if (this.chatWithUsername !== undefined) {
         this.loadChatMessages(this.chatWithUsername);
+        this.initChatBoxAvatar(this.chatWithUsername);
       }
     });
     this.scrollToBottom();
@@ -98,6 +100,16 @@ export class ChatComponent implements OnInit {
       reader.readAsDataURL(blob);
       reader.onloadend = () => {
         chatHistoryDataEl.avatar = reader.result;
+      };
+    });
+  }
+
+  initChatBoxAvatar(username: string) {
+    this.userService.getAvatar(username).subscribe(blob => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        this.anotherUserAvatar = reader.result;
       };
     });
   }
@@ -133,6 +145,7 @@ export class ChatComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {with: chatData.anotherUserUsername},
     });
+    this.anotherUserAvatar = chatData.avatar;
   }
 
   scrollToBottom(): void {

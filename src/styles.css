@@ -32,3 +32,8 @@ table {
 .bold {
   font-weight: bold;
 }
+
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
+}
