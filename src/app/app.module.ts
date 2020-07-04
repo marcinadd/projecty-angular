@@ -55,6 +55,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {SettingsComponent} from './components/settings/settings.component';
 import {AvatarComponent} from './components/settings/avatar/avatar.component';
+import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {AvatarComponent} from './components/settings/avatar/avatar.component';
     SortByPipe,
     NotificationsComponent,
     SettingsComponent,
-    AvatarComponent
+    AvatarComponent,
+    StartChatComponent
   ],
   imports: [
     BrowserModule,

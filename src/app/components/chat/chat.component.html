@@ -7,6 +7,11 @@
           <div class="recent_heading">
             <h4>Recent</h4>
           </div>
+          <div class="srch_bar">
+            <button (click)="openStartChatDialog()" color="primary" mat-fab>
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
         </div>
         <div class="inbox_chat">
           <div (click)="onChatSelected(chatData)"

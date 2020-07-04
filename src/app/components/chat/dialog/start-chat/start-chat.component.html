@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Start chat</h2>
+<mat-dialog-content>
+  <mat-form-field (input)="onTextChange($event.target.value)" appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-selection-list (selectionChange)="onOptionSelected($event.option.value)" [multiple]="false">
+    <mat-list-option *ngFor="let username of usernames" [value]="username">
+      <!--TODO Show avatar here-->
+      <div mat-line>{{username}}</div>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onNoClick()" mat-button>Dismiss</button>
+</mat-dialog-actions>

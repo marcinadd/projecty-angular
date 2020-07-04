@@ -10,6 +10,8 @@ import {Subscription} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {SocketService} from '../../services/socket.service';
 import {UserService} from '../../services/user.service';
+import {MatDialog} from '@angular/material/dialog';
+import {StartChatComponent} from './dialog/start-chat/start-chat.component';
 
 @Component({
   selector: 'app-chat',
@@ -34,6 +36,7 @@ export class ChatComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -167,5 +170,19 @@ export class ChatComponent implements OnInit {
 
   onTextTyping() {
     this.scrollToBottom();
+  }
+
+  openStartChatDialog() {
+    const dialogRef = this.dialog.open(StartChatComponent, {
+      width: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {with: result},
+        });
+      }
+    });
   }
 }
