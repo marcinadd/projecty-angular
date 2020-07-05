@@ -6,9 +6,9 @@
   </mat-form-field>
 
   <mat-selection-list (selectionChange)="onOptionSelected($event.option.value)" [multiple]="false">
-    <mat-list-option *ngFor="let username of usernames" [value]="username">
-      <!--TODO Show avatar here-->
-      <div mat-line>{{username}}</div>
+    <mat-list-option *ngFor="let userData of users" [value]="userData.username">
+      <img [src]="userData.avatar !== undefined ? userData.avatar: defaultAvatarUrl" mat-list-avatar>
+      <div mat-line>{{userData.username}}</div>
     </mat-list-option>
   </mat-selection-list>
 </mat-dialog-content>

@@ -121,6 +121,10 @@ export class ChatComponent implements OnInit {
     this.chatService.getChatMessages(username).subscribe(chatMessages => {
       this.chatMessages = chatMessages.content;
       ChatService.resetUnreadMessageCounterForUsername(username, this.chatHistoryData);
+    }, () => {
+      this.router.navigate([], {
+        relativeTo: this.route,
+      });
     });
   }
 
