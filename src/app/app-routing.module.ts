@@ -7,7 +7,7 @@ import {AddTaskComponent} from './components/task/add-task/add-task.component';
 import {TasksComponent} from './components/task/tasks/tasks.component';
 import {ManageTaskComponent} from './components/task/manage-task/manage-task.component';
 import {AuthGuard} from './guards/auth.guard';
-import {AddTeamComponent} from './components/teams/add-team/add-team.component';
+import {AddTeamComponent} from './components/teams/dialog/add-team/add-team.component';
 import {TeamsComponent} from './components/teams/teams/teams.component';
 import {ManageTeamComponent} from './components/teams/manage-team/manage-team.component';
 import {IndexComponent} from './components/index/index.component';

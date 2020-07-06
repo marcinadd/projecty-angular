@@ -27,7 +27,7 @@ import {DynamicUsernamesFormComponent} from './components/dynamic-usernames-form
 import {MatDividerModule} from '@angular/material/divider';
 import {DeleteDialogComponent} from './components/dialogs/delete-dialog/delete-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {AddTeamComponent} from './components/teams/add-team/add-team.component';
+import {AddTeamComponent} from './components/teams/dialog/add-team/add-team.component';
 import {TeamsComponent} from './components/teams/teams/teams.component';
 import {ManageTeamComponent} from './components/teams/manage-team/manage-team.component';
 import {EditTeamComponent} from './components/teams/manage-team/edit-team/edit-team.component';

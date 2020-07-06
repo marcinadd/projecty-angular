@@ -7,7 +7,6 @@ import {ChatMessage} from '../../models/ChatMessage';
 import {environment} from '../../../environments/environment';
 import {SocketService} from '../../services/socket.service';
 import {UserService} from '../../services/user.service';
-import {FileService} from '../../services/file.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +22,7 @@ export class NavbarComponent implements OnInit {
     private notificationService: NotificationService,
     private notificationsToastService: NotificationsService,
     private socketService: SocketService,
-    private userService: UserService,
-    private fileService: FileService
+    private userService: UserService
   ) {
   }
 
@@ -84,5 +82,10 @@ export class NavbarComponent implements OnInit {
         that.avatar = reader.result;
       };
     });
+  }
+
+  logOut() {
+    this.authService.logOut();
+    location.reload();
   }
 }

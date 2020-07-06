@@ -47,4 +47,8 @@ export class TeamService {
   getTeamProjects(teamId: number): Observable<TeamProjectsData> {
     return this.http.get<TeamProjectsData>(`${this.apiTeamsUrl}/${teamId}/projects`);
   }
+
+  getTeamRoleForCurrentUserByTeamId(teamId: number): Observable<TeamRole> {
+    return this.http.get<TeamRole>(`${this.apiTeamsUrl}/${teamId}/teamRole`);
+  }
 }

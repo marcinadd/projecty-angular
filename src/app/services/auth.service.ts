@@ -18,4 +18,8 @@ export class AuthService {
     const helper = new JwtHelperService();
     return helper.decodeToken(this.oauthService.getIdToken()).preferred_username;
   }
+
+  logOut() {
+    return this.oauthService.logOut();
+  }
 }
