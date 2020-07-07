@@ -35,7 +35,6 @@ import {ManageTeamRolesComponent} from './components/teams/manage-team/manage-te
 import {IndexComponent} from './components/index/index.component';
 import {MatIconModule} from '@angular/material/icon';
 import {AddProjectSpecifiedTeamComponent} from './components/teams/add-project-specified-team/add-project-specified-team.component';
-import {TeamProjectsComponent} from './components/teams/team-projects/team-projects.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MessagesComponent} from './components/message/messages/messages.component';
@@ -79,7 +78,6 @@ import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat
     ManageTeamRolesComponent,
     IndexComponent,
     AddProjectSpecifiedTeamComponent,
-    TeamProjectsComponent,
     MessagesComponent,
     SendMessageComponent,
     ViewMessageComponent,

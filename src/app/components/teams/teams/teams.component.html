@@ -34,7 +34,7 @@
       </div>
       <div class="d-flex justify-content-around">
         <div class="p-2">
-          <a [routerLink]="['/teams',teamRole.team.id,'projects']">
+          <a [queryParams]="{team: teamRole.team.id}" [routerLink]="['/projects']">
             <button class="btn btn-secondary" id="projectListButton" type="button">Project list</button>
           </a>
         </div>

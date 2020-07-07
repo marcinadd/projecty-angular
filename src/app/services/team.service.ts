@@ -51,4 +51,8 @@ export class TeamService {
   getTeamRoleForCurrentUserByTeamId(teamId: number): Observable<TeamRole> {
     return this.http.get<TeamRole>(`${this.apiTeamsUrl}/${teamId}/teamRole`);
   }
+
+  deleteTeam(teamId: number): Observable<any> {
+    return this.http.delete(this.apiTeamsUrl + '/' + teamId);
+  }
 }

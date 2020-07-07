@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TeamService} from '../../../services/team.service';
 import {Team} from '../../../models/Team';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynamic-usernames-form.component';
 import {TeamRole} from '../../../models/TeamRole';
@@ -21,7 +21,8 @@ export class ManageTeamComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
   }
@@ -45,5 +46,11 @@ export class ManageTeamComponent implements OnInit {
 
   onTeamRoleDeleted(teamRole: TeamRole) {
     this.team.teamRoles = this.team.teamRoles.filter(t => t !== teamRole);
+  }
+
+  onDeleteTeam() {
+    this.teamService.deleteTeam(this.teamId).subscribe(() => {
+      this.router.navigate(['/teams']);
+    });
   }
 }

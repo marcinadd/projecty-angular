@@ -8,6 +8,7 @@ import {Project} from '../../../models/Project';
 import {AddProjectDialogComponent} from './dialog/add-project-dialog/add-project-dialog.component';
 import {AddProjectSpecifiedTeamDialogComponent} from './dialog/add-project-specified-team-dialog/add-project-specified-team-dialog.component';
 import {TeamService} from '../../../services/team.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -17,31 +18,32 @@ import {TeamService} from '../../../services/team.service';
 export class ProjectsComponent implements OnInit {
   projectRoles: ProjectRole[];
   projectsTeam: ProjectsTeamData[];
+  selectedTeamId;
 
   constructor(
     private projectService: ProjectService,
     private teamService: TeamService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.selectedTeamId = Number(params['team']);
+    });
+
     this.projectService.getProjects().subscribe(data => {
       this.projectRoles = data.projectRoles;
       this.projectsTeam = data.teamProjects;
-
-      console.log(data);
     });
   }
 
   openProjectRolesDialog(project: Project) {
-    const dialogRef = this.dialog.open(ProjectRolesDialogComponent, {
+    this.dialog.open(ProjectRolesDialogComponent, {
       width: '300px',
       data: project
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -53,7 +55,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProjectForSpecifiedTeam(projectsTeamData: ProjectsTeamData, teamForm) {
-    console.log(projectsTeamData);
     this.teamService.addProjectToSpecifiedTeam(projectsTeamData.team.id, teamForm).subscribe(project => {
       projectsTeamData.projects.push(project);
     });
@@ -83,5 +84,32 @@ export class ProjectsComponent implements OnInit {
         this.createProjectForSpecifiedTeam(projectsTeamData, result);
       }
     });
+  }
+
+  getSelectedIndex(): number {
+    if (this.projectsTeam) {
+      if (this.selectedTeamId === undefined) {
+        return 0;
+      }
+      for (let i = 0; i < this.projectsTeam.length; i++) {
+        if (this.projectsTeam[i].team.id === this.selectedTeamId) {
+          return i + 1;
+        }
+      }
+    }
+    return 0;
+  }
+
+  onSelectedIndexChange(index: number) {
+    if (index === 0) {
+      this.selectedTeamId = undefined;
+      this.router.navigate([], {relativeTo: this.route});
+    } else {
+      this.selectedTeamId = this.projectsTeam[index - 1].team.id;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {team: this.selectedTeamId},
+      });
+    }
   }
 }
