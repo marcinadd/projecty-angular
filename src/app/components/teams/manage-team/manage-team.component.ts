@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynamic-usernames-form.component';
 import {TeamRole} from '../../../models/TeamRole';
+import {DeleteDialogComponent} from '../../dialogs/delete-dialog/delete-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-team',
@@ -22,7 +24,8 @@ export class ManageTeamComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
 
   }
@@ -48,7 +51,21 @@ export class ManageTeamComponent implements OnInit {
     this.team.teamRoles = this.team.teamRoles.filter(t => t !== teamRole);
   }
 
-  onDeleteTeam() {
+  openDeleteTeamDialog() {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {id: this.teamId, name: this.team.name}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.deleteTeam();
+      }
+    });
+  }
+
+
+  deleteTeam() {
     this.teamService.deleteTeam(this.teamId).subscribe(() => {
       this.router.navigate(['/teams']);
     });

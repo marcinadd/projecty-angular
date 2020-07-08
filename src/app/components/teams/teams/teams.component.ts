@@ -4,6 +4,7 @@ import {TeamRole} from '../../../models/TeamRole';
 import {MatDialog} from '@angular/material/dialog';
 import {AddTeamComponent} from '../dialog/add-team/add-team.component';
 import {TeamRoleService} from '../../../services/team-role.service';
+import {LeaveTeamComponent} from '../dialog/leave-team/leave-team.component';
 
 @Component({
   selector: 'app-teams',
@@ -47,6 +48,24 @@ export class TeamsComponent implements OnInit {
     this.teamService.getTeamRoleForCurrentUserByTeamId(teamId).subscribe(teamRole => {
       this.teamRoles.push(teamRole);
       console.log(teamRole);
+    });
+  }
+
+  openLeaveTeamDialog(teamRole: TeamRole) {
+    const dialogRef = this.dialog.open(LeaveTeamComponent, {
+      width: '500px',
+      data: teamRole
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.leaveTeam(teamRole);
+      }
+    });
+  }
+
+  private leaveTeam(teamRole: TeamRole) {
+    this.teamService.leaveTeam(teamRole.team.id).subscribe(() => {
+      this.teamRoles = this.teamRoles.filter(t => t !== teamRole);
     });
   }
 }

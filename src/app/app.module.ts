@@ -55,6 +55,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
 import {SettingsComponent} from './components/settings/settings.component';
 import {AvatarComponent} from './components/settings/avatar/avatar.component';
 import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat.component';
+import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-team.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat
     NotificationsComponent,
     SettingsComponent,
     AvatarComponent,
-    StartChatComponent
+    StartChatComponent,
+    LeaveTeamComponent
   ],
   imports: [
     BrowserModule,

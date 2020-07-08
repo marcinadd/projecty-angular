@@ -55,4 +55,8 @@ export class TeamService {
   deleteTeam(teamId: number): Observable<any> {
     return this.http.delete(this.apiTeamsUrl + '/' + teamId);
   }
+
+  leaveTeam(teamId: number): Observable<any> {
+    return this.http.post(`${this.apiTeamsUrl}/${teamId}/leave`, null);
+  }
 }

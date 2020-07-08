@@ -38,20 +38,14 @@
             <button class="btn btn-secondary" id="projectListButton" type="button">Project list</button>
           </a>
         </div>
-        <ng-container *ngIf="teamRole.name === 'MANAGER'">
-          <div class="p-2">
-            <a [routerLink]="['/teams',teamRole.team.id,'manage']">
-              <button class="btn btn-warning" id="addTaskButton" type="button">Manage team</button>
-            </a>
-          </div>
-          <div class="p-2">
-            <a [routerLink]="['/teams',teamRole.team.id,'projects','add']">
-              <button class="btn btn-success" disabled id="addProjectButton" type="button">Add project</button>
-            </a>
-          </div>
-        </ng-container>
+        <div *ngIf="teamRole.name === 'MANAGER'" class="p-2">
+          <a [routerLink]="['/teams',teamRole.team.id,'manage']">
+            <button class="btn btn-warning" id="addTaskButton" type="button">Manage team</button>
+          </a>
+        </div>
         <div class="p-2">
-          <button class="btn btn-danger" disabled id="leaveTeamButton" type="submit">Leave team</button>
+          <button (click)="openLeaveTeamDialog(teamRole)" class="btn btn-danger" id="leaveTeamButton">Leave team
+          </button>
         </div>
       </div>
     </li>

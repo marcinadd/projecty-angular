@@ -1,0 +1,13 @@
+<div>
+  <h2 mat-dialog-title>Leave {{data.team.name}}?</h2>
+  <mat-dialog-content>
+    <div>You will be removed from this team. Team managers will be able to add you again.</div>
+    <div *ngIf="data.name === 'MANAGER'" class="text-danger">
+      You are team manager. You can leave team only if there will be at least one other team manager left.
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>Dismiss</button>
+    <button [mat-dialog-close]="data.id" mat-button>Leave</button>
+  </mat-dialog-actions>
+</div>
