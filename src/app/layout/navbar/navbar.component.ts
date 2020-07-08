@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
   private handleIncomingChatMessage(chatMessage: ChatMessage) {
     if (chatMessage !== null) {
       this.notificationsToastService.success(chatMessage.sender.username, chatMessage.text, {
-        timeout: 5000
+        timeOut: 5000
       });
     }
   }
@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
     if (notification !== null) {
       this.unseenNotificationsCounter++;
       this.notificationsToastService.info('Notification', notification.stringValue, {
-        timeout: 5000
+        timeOut: 5000
       });
     }
   }

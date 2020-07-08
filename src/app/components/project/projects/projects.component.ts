@@ -48,9 +48,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(projectForm) {
-    this.projectService.createProject(projectForm).subscribe(projectForm => {
-      // TODO Add project to list
-      console.log(projectForm);
+    this.projectService.createProject(projectForm).subscribe(project => {
+      this.projectService.getProjectRoleForCurrentUserByProjectId(project.id).subscribe(projectRole => {
+        this.projectRoles.push(projectRole);
+      });
     });
   }
 

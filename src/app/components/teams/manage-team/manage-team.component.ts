@@ -7,6 +7,7 @@ import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynami
 import {TeamRole} from '../../../models/TeamRole';
 import {DeleteDialogComponent} from '../../dialogs/delete-dialog/delete-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-manage-team',
@@ -25,7 +26,8 @@ export class ManageTeamComponent implements OnInit {
     private teamService: TeamService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notificationsService: NotificationsService
   ) {
 
   }
@@ -64,9 +66,9 @@ export class ManageTeamComponent implements OnInit {
     });
   }
 
-
   deleteTeam() {
     this.teamService.deleteTeam(this.teamId).subscribe(() => {
+      this.notificationsService.success('Success', 'Team ' + this.team.name + ' deleted', {timeOut: 5000});
       this.router.navigate(['/teams']);
     });
   }

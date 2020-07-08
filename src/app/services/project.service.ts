@@ -42,4 +42,8 @@ export class ProjectService {
   deleteProject(projectId: number) {
     return this.http.delete(this.apiProjectsUrl + '/' + projectId);
   }
+
+  getProjectRoleForCurrentUserByProjectId(projectId: number): Observable<ProjectRole> {
+    return this.http.get<ProjectRole>(`${this.apiProjectsUrl}/${projectId}/projectRole`);
+  }
 }

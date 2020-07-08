@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddTeamComponent} from '../dialog/add-team/add-team.component';
 import {TeamRoleService} from '../../../services/team-role.service';
 import {LeaveTeamComponent} from '../dialog/leave-team/leave-team.component';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-teams',
@@ -17,7 +18,8 @@ export class TeamsComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private teamRoleService: TeamRoleService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notificationsService: NotificationsService
   ) {
   }
 
@@ -40,6 +42,7 @@ export class TeamsComponent implements OnInit {
 
   addTeam(teamForm) {
     this.teamService.createTeam(teamForm).subscribe(team => {
+      this.notificationsService.success('Success', 'Team ' + team.name + ' created', {timeOut: 5000});
       this.getTeamRole(team.id);
     });
   }
@@ -66,6 +69,9 @@ export class TeamsComponent implements OnInit {
   private leaveTeam(teamRole: TeamRole) {
     this.teamService.leaveTeam(teamRole.team.id).subscribe(() => {
       this.teamRoles = this.teamRoles.filter(t => t !== teamRole);
+      this.notificationsService.success('Success', 'Successfully left ' + teamRole.team.name, {timeOut: 5000});
+    }, () => {
+      this.notificationsService.error('Error', 'Error while leaving team ' + teamRole.team.name, {timeOut: 5000});
     });
   }
 }
