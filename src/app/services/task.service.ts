@@ -43,4 +43,8 @@ export class TaskService {
   deleteTask(taskId: number): Observable<boolean> {
     return this.http.delete<boolean>(this.apiTaskUrl + '/' + taskId);
   }
+
+  getUndoneAssignedTasksForCurrentUser(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.apiTaskUrl + '/assigned');
+  }
 }

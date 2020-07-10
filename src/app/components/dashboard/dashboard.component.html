@@ -1,0 +1,44 @@
+<h1>Tasks assigned to you</h1>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card-content>
+      <h2>To do tasks</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let task of toDoTasks">
+          <h3 mat-line>{{task.name}}</h3>
+          <h3 mat-line>Deadline: {{task.endDate}}</h3>
+          <a class="inheritColor">
+            <button mat-icon-button
+                    matTooltip="Mark task as in progress">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card-content>
+      <h2>In progress tasks</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let task of inProgressTasks">
+          <h3 mat-line>{{task.name}}</h3>
+          <h3 mat-line>Deadline: {{task.endDate}}</h3>
+          <a class="inheritColor">
+            <button mat-icon-button
+                    matTooltip="Mark task as to do">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+          </a>
+          <a class="inheritColor">
+            <button mat-icon-button
+                    matTooltip="Mark task as done">
+              <mat-icon>done</mat-icon>
+            </button>
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-grid-tile>
+</mat-grid-list>
+
