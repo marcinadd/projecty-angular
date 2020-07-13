@@ -1,43 +1,68 @@
 <h1>Tasks assigned to you</h1>
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list cols="2">
   <mat-grid-tile>
     <mat-card-content>
       <h2>To do tasks</h2>
-      <mat-list>
-        <mat-list-item *ngFor="let task of toDoTasks">
-          <h3 mat-line>{{task.name}}</h3>
-          <h3 mat-line>Deadline: {{task.endDate}}</h3>
-          <a class="inheritColor">
-            <button mat-icon-button
-                    matTooltip="Mark task as in progress">
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          </a>
-        </mat-list-item>
-      </mat-list>
+      <div *ngIf="toDoTasks.length>0; else toDoElseBlock">
+        <mat-list>
+          <mat-list-item *ngFor="let task of toDoTasks">
+            <h3 mat-line>{{task.name}}</h3>
+            <h3 *ngIf="task.dateDifferenceInDaysToStart <=0" class="text-warning" mat-line>
+              Should be started
+              <span [ngPlural]="task.dateDifferenceInDaysToStart">
+                <ng-template ngPluralCase="<0">{{task.dateDifferenceInDaysToStart}} ago</ng-template>
+                <ng-template ngPluralCase="=0">today</ng-template>
+              </span>
+
+            </h3>
+            <h3 mat-line>Starts on: {{task.startDate| date}}</h3>
+            <a class="inheritColor">
+              <button (click)="setTaskStatus(task,taskStatuses.IN_PROGRESS)"
+                      mat-icon-button
+                      matTooltip="Mark task as in progress">
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </a>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <ng-template #toDoElseBlock>
+        No to do tasks
+      </ng-template>
     </mat-card-content>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-card-content>
       <h2>In progress tasks</h2>
+      <div *ngIf="inProgressTasks.length >0; else inProgressElseBlock">
       <mat-list>
         <mat-list-item *ngFor="let task of inProgressTasks">
           <h3 mat-line>{{task.name}}</h3>
-          <h3 mat-line>Deadline: {{task.endDate}}</h3>
+          <!--          <h3 mat-line>Deadline: {{task.endDate}}</h3>-->
+          <h3 mat-line>{{task.dateDifferenceInDaysToEnd}}</h3>
+          <h3 [class.text-warning]="currentDate>task.startDate" mat-line>
+            A
+          </h3>
           <a class="inheritColor">
             <button mat-icon-button
+                    (click)="setTaskStatus(task,taskStatuses.TO_DO)"
                     matTooltip="Mark task as to do">
               <mat-icon>arrow_back</mat-icon>
             </button>
           </a>
           <a class="inheritColor">
             <button mat-icon-button
+                    (click)="setTaskStatus(task,taskStatuses.DONE)"
                     matTooltip="Mark task as done">
               <mat-icon>done</mat-icon>
             </button>
           </a>
         </mat-list-item>
       </mat-list>
+      </div>
+      <ng-template #inProgressElseBlock>
+        No in progress tasks
+      </ng-template>
     </mat-card-content>
   </mat-grid-tile>
 </mat-grid-list>

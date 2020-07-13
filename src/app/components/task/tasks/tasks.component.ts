@@ -6,6 +6,7 @@ import {Task} from '../../../models/Task';
 import {TaskStatus} from '../../../models/TaskStatus';
 import {MatDialog} from '@angular/material/dialog';
 import {AddTaskComponent} from '../add-task/add-task.component';
+import {DateHelper} from '../../../helpers/date-helper';
 
 @Component({
   selector: 'app-tasks',
@@ -30,15 +31,6 @@ export class TasksComponent implements OnInit {
     this.taskService.getProjectTasksData(this.projectId).subscribe(projectTasksData => {
       this.projectTasksData = projectTasksData;
     });
-  }
-
-  getDateDifferenceInDays(startDate, endDate) {
-    startDate = new Date(startDate);
-    endDate = new Date(endDate);
-    return Math.floor(
-      (Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) - Date.UTC(startDate.getFullYear(),
-        startDate.getMonth(), startDate.getDate())) / (1000 * 60 * 60 * 24)
-    );
   }
 
   hasPermissionToEditOrIsAssignedToTask(task: Task) {
@@ -97,5 +89,9 @@ export class TasksComponent implements OnInit {
         this.addTask(result);
       }
     });
+  }
+
+  getDateDifferenceInDays(currentDate: Date, startDate: Date) {
+    return DateHelper.getDateDifferenceInDays(currentDate, startDate);
   }
 }
