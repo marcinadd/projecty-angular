@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class AuthService {
   }
 
   logOut() {
+    this.oauthService.revocationEndpoint = environment.authConfig.revocationEndpoint;
     return this.oauthService.logOut();
   }
 }
