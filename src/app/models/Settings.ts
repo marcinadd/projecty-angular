@@ -1,9 +1,8 @@
 export class Settings {
   id: number;
 //    Notifications
-  isProjectEmailNotificationsEnabled: boolean;
-  isTeamEmailNotificationsEnabled: boolean;
-  isMessageEmailNotificationsEnabled: boolean;
+  isEmailNotificationEnabled: boolean;
+  isMessageEmailNotificationEnabled: boolean;
 //    Project/Teams
   canBeAddedToProject: boolean;
   canBeAddedToTeam: boolean;

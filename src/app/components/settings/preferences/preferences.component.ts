@@ -18,11 +18,10 @@ export class PreferencesComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsForm = this.formBuilder.group({
-      isProjectEmailNotificationsEnabled: false,
-      isTeamEmailNotificationsEnabled: false,
-      isMessageEmailNotificationsEnabled: false,
+      isEmailNotificationEnabled: false,
+      isMessageEmailNotificationEnabled: false,
       canBeAddedToProject: false,
-      // canBeAddedToTeam: false
+      canBeAddedToTeam: false
     });
     this.settingsService.getSettings().subscribe(settings => {
       this.setSettings(settings);
@@ -38,11 +37,10 @@ export class PreferencesComponent implements OnInit {
 
   private setSettings(settings: Settings) {
     this.settingsForm = this.formBuilder.group({
-      isProjectEmailNotificationsEnabled: settings.isProjectEmailNotificationsEnabled,
-      isTeamEmailNotificationsEnabled: settings.isTeamEmailNotificationsEnabled,
-      isMessageEmailNotificationsEnabled: settings.isMessageEmailNotificationsEnabled,
+      isEmailNotificationEnabled: settings.isEmailNotificationEnabled,
+      isMessageEmailNotificationEnabled: settings.isMessageEmailNotificationEnabled,
       canBeAddedToProject: settings.canBeAddedToProject,
-      // canBeAddedToTeam: settings.canBeAddedToTeam
+      canBeAddedToTeam: settings.canBeAddedToTeam
     });
   }
 }
