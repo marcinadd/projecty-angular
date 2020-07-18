@@ -1,0 +1,13 @@
+<p>preferences works!</p>
+<form (ngSubmit)="onSubmit(settingsForm.value)" [formGroup]="settingsForm">
+  <section>
+    <mat-checkbox class="example-margin" formControlName="isProjectEmailNotificationsEnabled">
+      Allow adding to a project
+    </mat-checkbox>
+  </section>
+  <section>
+    <mat-checkbox class="example-margin" formControlName="isTeamEmailNotificationsEnabled">Allow adding to a team
+    </mat-checkbox>
+  </section>
+  <button color="primary" mat-raised-button>Save</button>
+</form>

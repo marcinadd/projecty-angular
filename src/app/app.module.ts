@@ -56,6 +56,8 @@ import {SettingsComponent} from './components/settings/settings.component';
 import {AvatarComponent} from './components/settings/avatar/avatar.component';
 import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat.component';
 import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-team.component';
+import {PreferencesComponent} from './components/settings/preferences/preferences.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,8 @@ import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-tea
     SettingsComponent,
     AvatarComponent,
     StartChatComponent,
-    LeaveTeamComponent
+    LeaveTeamComponent,
+    PreferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +126,7 @@ import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-tea
     MatPaginatorModule,
     MatAutocompleteModule,
     SimpleNotificationsModule.forRoot(),
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
