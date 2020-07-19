@@ -59,6 +59,8 @@ import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-tea
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
+import {PreferencesComponent} from './components/settings/preferences/preferences.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import {MatCardModule} from '@angular/material/card';
     AvatarComponent,
     StartChatComponent,
     LeaveTeamComponent,
-    DashboardComponent
+    DashboardComponent,
+    LeaveTeamComponent,
+    PreferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -129,6 +133,7 @@ import {MatCardModule} from '@angular/material/card';
     SimpleNotificationsModule.forRoot(),
     MatTooltipModule,
     MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

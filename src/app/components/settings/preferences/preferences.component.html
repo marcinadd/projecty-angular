@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit(settingsForm.value)" [formGroup]="settingsForm">
+  <section>
+    <mat-checkbox class="example-margin" formControlName="isMessageEmailNotificationEnabled">
+      Receive notifications about messages send to you
+    </mat-checkbox>
+  </section>
+  <section>
+    <mat-checkbox class="example-margin" formControlName="isEmailNotificationEnabled">
+      Receive other email notifications
+    </mat-checkbox>
+  </section>
+  <section>
+    <mat-checkbox class="example-margin" formControlName="canBeAddedToProject">
+      Allow adding me to projects
+    </mat-checkbox>
+  </section>
+  <section>
+    <mat-checkbox class="example-margin" formControlName="canBeAddedToTeam">
+      Allow adding me to teams
+    </mat-checkbox>
+  </section>
+  <button color="primary" mat-raised-button>Save</button>
+</form>

@@ -20,6 +20,7 @@ export const environment = {
   },
   authConfig: new AuthConfig({
     issuer: 'http://localhost:8081/auth/realms/Projecty',
+    revocationEndpoint: 'http://localhost:8081/auth/realms/Projecty/protocol/openid-connect/revoke',
     redirectUri: window.location.origin,
     clientId: 'sso-client',
     responseType: 'code',

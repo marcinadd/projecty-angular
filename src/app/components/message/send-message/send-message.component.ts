@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MessageService} from '../../../services/message.service';
 import {Router} from '@angular/router';
@@ -10,13 +10,12 @@ import {Router} from '@angular/router';
 })
 export class SendMessageComponent implements OnInit {
   messageForm;
-  attachments;
+  attachments = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private messageService: MessageService,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private router: Router
   ) {
   }
 
