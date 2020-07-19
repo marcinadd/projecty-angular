@@ -8,6 +8,7 @@ import {DynamicUsernamesFormComponent} from '../../dynamic-usernames-form/dynami
 import {ProjectRoleService} from '../../../services/project-role.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DeleteDialogComponent} from '../../dialogs/delete-dialog/delete-dialog.component';
+import {RoleNotificationService} from '../../../services/role-notification.service';
 
 @Component({
   selector: 'app-manage-project',
@@ -29,7 +30,8 @@ export class ManageProjectComponent implements OnInit {
     private projectRoleService: ProjectRoleService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private roleNotificationService: RoleNotificationService
   ) {
 
   }
@@ -85,8 +87,12 @@ export class ManageProjectComponent implements OnInit {
   }
 
   onAddProjectRoles() {
-    this.projectService.addProjectRoles(this.project.id, this.usernamesComponent.getUsernameArray()).subscribe(projectRoles => {
+    const usernames = this.usernamesComponent.getUsernameArray();
+    this.projectService.addProjectRoles(this.project.id, usernames).subscribe(projectRoles => {
       this.projectRoles.push(...projectRoles);
+      this.roleNotificationService.showNotificationsAboutNotAddedUsers(
+        usernames, projectRoles, 'project', this.project.name
+      );
     });
   }
 }

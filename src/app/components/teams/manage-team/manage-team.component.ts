@@ -8,6 +8,7 @@ import {TeamRole} from '../../../models/TeamRole';
 import {DeleteDialogComponent} from '../../dialogs/delete-dialog/delete-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationsService} from 'angular2-notifications';
+import {RoleNotificationService} from '../../../services/role-notification.service';
 
 @Component({
   selector: 'app-manage-team',
@@ -27,7 +28,8 @@ export class ManageTeamComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private roleNotificationService: RoleNotificationService
   ) {
 
   }
@@ -44,8 +46,12 @@ export class ManageTeamComponent implements OnInit {
   }
 
   onAddTeamRoles() {
-    this.teamService.addTeamRoles(this.teamId, this.usernamesComponent.getUsernameArray()).subscribe(teamRoles => {
+    const usernames = this.usernamesComponent.getUsernameArray();
+    this.teamService.addTeamRoles(this.teamId, usernames).subscribe(teamRoles => {
       this.team.teamRoles.push(...teamRoles);
+      this.roleNotificationService.showNotificationsAboutNotAddedUsers(
+        usernames, teamRoles, 'team', this.team.name
+      );
     });
   }
 
