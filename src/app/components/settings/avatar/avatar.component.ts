@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-avatar',
@@ -9,7 +10,10 @@ import {UserService} from '../../../services/user.service';
 export class AvatarComponent implements OnInit {
   avatar;
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private notificationsService: NotificationsService
+  ) {
   }
 
   ngOnInit(): void {
@@ -23,7 +27,7 @@ export class AvatarComponent implements OnInit {
     const formData = new FormData();
     formData.append('avatar', this.avatar);
     this.userService.uploadAvatar(formData).subscribe(() => {
-      console.log('Avatar uploaded!');
+      this.notificationsService.success('Success', 'Avatar updated!');
     });
   }
 }
