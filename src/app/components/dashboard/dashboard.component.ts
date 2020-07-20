@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit {
   toDoTasks: Task[] = [];
   inProgressTasks: Task[] = [];
   taskStatuses = TaskStatus;
-  currentDate = new Date();
 
   constructor(
     private taskService: TaskService
