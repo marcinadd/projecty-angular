@@ -56,6 +56,9 @@ import {SettingsComponent} from './components/settings/settings.component';
 import {AvatarComponent} from './components/settings/avatar/avatar.component';
 import {StartChatComponent} from './components/chat/dialog/start-chat/start-chat.component';
 import {LeaveTeamComponent} from './components/teams/dialog/leave-team/leave-team.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCardModule} from '@angular/material/card';
 import {PreferencesComponent} from './components/settings/preferences/preferences.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -95,6 +98,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AvatarComponent,
     StartChatComponent,
     LeaveTeamComponent,
+    DashboardComponent,
+    LeaveTeamComponent,
     PreferencesComponent
   ],
   imports: [
@@ -126,6 +131,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatPaginatorModule,
     MatAutocompleteModule,
     SimpleNotificationsModule.forRoot(),
+    MatTooltipModule,
+    MatCardModule,
     MatCheckboxModule,
   ],
   providers: [],
