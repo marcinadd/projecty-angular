@@ -9,6 +9,8 @@ import {AddProjectDialogComponent} from './dialog/add-project-dialog/add-project
 import {AddProjectSpecifiedTeamDialogComponent} from './dialog/add-project-specified-team-dialog/add-project-specified-team-dialog.component';
 import {TeamService} from '../../../services/team.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotificationsService} from 'angular2-notifications';
+import {RoleNotificationService} from '../../../services/role-notification.service';
 
 @Component({
   selector: 'app-projects',
@@ -25,7 +27,9 @@ export class ProjectsComponent implements OnInit {
     private teamService: TeamService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private notificationsService: NotificationsService,
+    private roleNotificationService: RoleNotificationService
   ) {
   }
 
@@ -49,6 +53,10 @@ export class ProjectsComponent implements OnInit {
 
   createProject(projectForm) {
     this.projectService.createProject(projectForm).subscribe(project => {
+      this.notificationsService.success('Success', 'Project ' + project.name + ' created', {timeOut: 5000});
+      this.roleNotificationService.showNotificationsAboutNotAddedUsers(
+        projectForm.usernames, project.projectRoles, 'project', project.name
+      );
       this.projectService.getProjectRoleForCurrentUserByProjectId(project.id).subscribe(projectRole => {
         this.projectRoles.push(projectRole);
       });

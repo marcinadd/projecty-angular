@@ -6,6 +6,7 @@ import {AddTeamComponent} from '../dialog/add-team/add-team.component';
 import {TeamRoleService} from '../../../services/team-role.service';
 import {LeaveTeamComponent} from '../dialog/leave-team/leave-team.component';
 import {NotificationsService} from 'angular2-notifications';
+import {RoleNotificationService} from '../../../services/role-notification.service';
 
 @Component({
   selector: 'app-teams',
@@ -19,7 +20,8 @@ export class TeamsComponent implements OnInit {
     private teamService: TeamService,
     private teamRoleService: TeamRoleService,
     private dialog: MatDialog,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private roleNotificationService: RoleNotificationService
   ) {
   }
 
@@ -43,6 +45,9 @@ export class TeamsComponent implements OnInit {
   addTeam(teamForm) {
     this.teamService.createTeam(teamForm).subscribe(team => {
       this.notificationsService.success('Success', 'Team ' + team.name + ' created', {timeOut: 5000});
+      this.roleNotificationService.showNotificationsAboutNotAddedUsers(
+        teamForm.usernames, team.teamRoles, 'team', team.name
+      );
       this.getTeamRole(team.id);
     });
   }

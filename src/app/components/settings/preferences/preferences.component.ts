@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SettingsService} from '../../../services/settings.service';
 import {Settings} from '../../../models/Settings';
 import {FormBuilder} from '@angular/forms';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-preferences',
@@ -12,8 +13,11 @@ export class PreferencesComponent implements OnInit {
   settings: Settings;
   settingsForm;
 
-
-  constructor(private settingsService: SettingsService, private formBuilder: FormBuilder) {
+  constructor(
+    private settingsService: SettingsService,
+    private formBuilder: FormBuilder,
+    private notificationsService: NotificationsService
+  ) {
   }
 
   ngOnInit(): void {
@@ -32,6 +36,7 @@ export class PreferencesComponent implements OnInit {
     console.log(patchedSettings);
     this.settingsService.patchSettings(patchedSettings).subscribe(settings => {
       this.setSettings(settings);
+      this.notificationsService.success('Success', 'Preferences updated!');
     });
   }
 
