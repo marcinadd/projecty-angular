@@ -1,0 +1,18 @@
+<button (click)="onImportanceSelected(1)"
+        [ngClass]="importance > 0 ? 'accent_color': 'black_color'"
+        mat-icon-button
+        matTooltip="Low importance">
+  <mat-icon>star</mat-icon>
+</button>
+<button (click)="onImportanceSelected(2)"
+        [ngClass]="importance > 1 ? 'accent_color': 'black_color'"
+        mat-icon-button
+        matTooltip="Normal importance">
+  <mat-icon>star</mat-icon>
+</button>
+<button (click)="onImportanceSelected(3)"
+        [ngClass]="importance > 2 ? 'accent_color': 'black_color'"
+        mat-icon-button
+        matTooltip="High importance">
+  <mat-icon>star</mat-icon>
+</button>

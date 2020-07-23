@@ -24,6 +24,7 @@
               </span>
               </h3>
               <h3 mat-line>Starts on: {{task.startDate| date}}</h3>
+              <app-importance [importance]="task.importance" readonly="true"></app-importance>
               <a class="inheritColor">
                 <button (click)="setTaskStatus(task,taskStatuses.IN_PROGRESS)"
                         mat-icon-button
@@ -61,8 +62,7 @@
                 <ng-template ngPluralCase="other">in {{task.dateDifferenceInDaysToEnd}} days</ng-template>
               </span>
               </h3>
-
-
+              <app-importance [importance]="task.importance" readonly="true"></app-importance>
               <a class="inheritColor">
                 <button (click)="setTaskStatus(task,taskStatuses.TO_DO)"
                         mat-icon-button

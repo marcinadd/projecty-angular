@@ -61,6 +61,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {PreferencesComponent} from './components/settings/preferences/preferences.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ImportanceComponent} from './components/task/importance/importance.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     LeaveTeamComponent,
     DashboardComponent,
     LeaveTeamComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    ImportanceComponent,
   ],
   imports: [
     BrowserModule,

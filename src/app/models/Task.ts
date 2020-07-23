@@ -10,6 +10,8 @@ export class Task {
   status: TaskStatus;
   project: Project;
   assignedUsers: User[];
+  importance: number;
+
   dateDifferenceInDaysToStart: number;
   dateDifferenceInDaysToEnd: number;
 }
