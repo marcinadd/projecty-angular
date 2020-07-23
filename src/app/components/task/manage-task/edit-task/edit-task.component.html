@@ -32,6 +32,9 @@
     </mat-form-field>
   </div>
   <div>
+    <app-importance (importanceChanged)="onImportanceChanged($event)" [importance]="importanceVal"></app-importance>
+  </div>
+  <div>
     <button color="primary" mat-button type="submit">Edit</button>
   </div>
 </form>

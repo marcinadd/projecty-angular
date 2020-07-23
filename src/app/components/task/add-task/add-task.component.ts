@@ -26,7 +26,8 @@ export class AddTaskComponent {
     this.taskCreateForm = this.formBuilder.group({
       name: '',
       startDate: currentDate,
-      endDate: currentDate
+      endDate: currentDate,
+      importance: 2
     });
   }
 
@@ -42,5 +43,9 @@ export class AddTaskComponent {
 
   onYesClick() {
     return this.taskCreateForm.value;
+  }
+
+  onImportanceChanged(value: number) {
+    this.taskCreateForm.patchValue({importance: value});
   }
 }

@@ -24,6 +24,7 @@
       </mat-form-field>
     </div>
   </form>
+  <app-importance (importanceChanged)="onImportanceChanged($event)" [importance]="2"></app-importance>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>

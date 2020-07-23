@@ -18,6 +18,8 @@ export class EditTaskComponent implements OnInit {
   changeTaskDataForm;
   private eventsSubscription: Subscription;
 
+  importanceVal = 2;
+
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService
@@ -26,7 +28,8 @@ export class EditTaskComponent implements OnInit {
       name: '',
       startDate: new Date(),
       endDate: new Date(),
-      status: ''
+      status: '',
+      importance: this.importanceVal
     });
   }
 
@@ -36,8 +39,9 @@ export class EditTaskComponent implements OnInit {
 
   onTaskDataLoaded(task: Task) {
     this.changeTaskDataForm.setValue(
-      {name: task.name, startDate: task.startDate, endDate: task.endDate, status: TaskStatus[task.status]}
+      {name: task.name, startDate: task.startDate, endDate: task.endDate, status: TaskStatus[task.status], importance: task.importance}
     );
+    this.importanceVal = task.importance;
   }
 
 
@@ -45,6 +49,11 @@ export class EditTaskComponent implements OnInit {
     this.taskService.patchTask(this.taskData.task.id, form).subscribe(task => {
       this.taskData.task = task;
     });
+  }
+
+  onImportanceChanged(value: number) {
+    this.importanceVal = value;
+    this.changeTaskDataForm.patchValue({importance: value});
   }
 
   ngOnDestroy() {
