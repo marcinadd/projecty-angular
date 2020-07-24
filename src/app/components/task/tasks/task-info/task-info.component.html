@@ -11,4 +11,7 @@
   </ng-template>
   <div class="row text-center">{{task.startDate}}</div>
   <div class="row text-center">{{task.endDate}}</div>
+  <div class="row text-ceneter">
+    <app-importance [importance]="task.importance" readonly="true"></app-importance>
+  </div>
 </div>
