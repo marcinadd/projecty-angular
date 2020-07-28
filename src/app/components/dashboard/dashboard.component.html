@@ -17,7 +17,7 @@
               </span>
               </h3>
               <h3 *ngIf="task.dateDifferenceInDaysToStart >0" class="text-success" mat-line>
-                Should be finished
+                Should be started
                 <span [ngPlural]="task.dateDifferenceInDaysToStart">
                 <ng-template ngPluralCase="=1">in a day</ng-template>
                 <ng-template ngPluralCase="other">in {{task.dateDifferenceInDaysToStart}} days</ng-template>

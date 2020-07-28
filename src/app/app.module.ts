@@ -62,6 +62,7 @@ import {MatCardModule} from '@angular/material/card';
 import {PreferencesComponent} from './components/settings/preferences/preferences.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ImportanceComponent} from './components/task/importance/importance.component';
+import {TruncatePipe} from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import {ImportanceComponent} from './components/task/importance/importance.compo
     LeaveTeamComponent,
     PreferencesComponent,
     ImportanceComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

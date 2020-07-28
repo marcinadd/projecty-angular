@@ -22,12 +22,12 @@
                                [task]="task"></app-task-info>
                 <div *ngIf="getDateDifferenceInDays(currentDate,task.startDate)>=0; else toDoDelayElse"
                      class="row text-center text-success">
-                  <p>Days to start: </p>
+                  <p>Days to start:&nbsp;</p>
                   <p class="text-center">{{getDateDifferenceInDays(currentDate, task.startDate)}}</p>
                 </div>
                 <ng-template #toDoDelayElse>
                   <div class="row text-center text-danger" v-else>
-                    <p>Delay (days): </p>
+                    <p>Delay (days):&nbsp;</p>
                     <p class="text-center">{{-getDateDifferenceInDays(currentDate, task.startDate)}}</p>
                   </div>
                 </ng-template>
@@ -59,13 +59,13 @@
                                [task]="task"></app-task-info>
                 <div *ngIf="getDateDifferenceInDays(currentDate,task.startDate)>=0; else inProgressDelayElse"
                      class="row text-center text-success">
-                  <p>Days to end: </p>
-                  <p class="text-center">{{getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                  <p>Days to end:&nbsp;</p>
+                  <p class="text-center">{{getDateDifferenceInDays(currentDate, task.endDate)}}</p>
                 </div>
                 <ng-template #inProgressDelayElse>
                   <div class="row text-center text-danger">
-                    <p>Delay (days): </p>
-                    <p class="text-center">{{-getDateDifferenceInDays(currentDate, task.startDate)}}</p>
+                    <p>Delay (days):&nbsp;</p>
+                    <p class="text-center">{{-getDateDifferenceInDays(currentDate, task.endDate)}}</p>
                   </div>
                 </ng-template>
                 <div *ngIf="hasPermissionToEditOrIsAssignedToTask(task)">

@@ -9,7 +9,7 @@
   </ng-container>
   <ng-container matColumnDef="text">
     <th *matHeaderCellDef mat-header-cell> Text</th>
-    <td *matCellDef="let message" mat-cell> {{message.text}} </td>
+    <td *matCellDef="let message" mat-cell> {{message.text|truncate:[47, '…']}} </td>
   </ng-container>
   <ng-container matColumnDef="sendDate">
     <th *matHeaderCellDef mat-header-cell> Date</th>
