@@ -30,4 +30,8 @@ export class MessageService {
   getMessage(messageId: number): Observable<Message> {
     return this.http.get<Message>(this.apiMessageUrl + '/' + messageId);
   }
+
+  replyToMessage(messageId, messageForm): Observable<Message> {
+    return this.http.post<Message>(`${this.apiMessageUrl}/${messageId}/reply`, messageForm);
+  }
 }

@@ -38,4 +38,5 @@ export class ViewMessageComponent implements OnInit {
       saveAs(data, attachment.fileName);
     });
   }
+
 }

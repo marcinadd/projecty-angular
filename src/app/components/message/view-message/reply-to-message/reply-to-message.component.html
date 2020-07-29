@@ -1,0 +1,24 @@
+<form (ngSubmit)="onSubmit(messageForm.value)" [formGroup]="messageForm" enctype="multipart/form-data">
+  <div>
+    <mat-form-field class="width50vw">
+      <mat-label>Subject</mat-label>
+      <input formControlName="title" matInput type="text">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="width50vw">
+      <mat-label>Text</mat-label>
+      <textarea cdkAutosizeMinRows="1" cdkTextareaAutosize formControlName="text" matInput type="text"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <label for="file">Choose File</label>
+    <input (change)="handleFileInput($event.target.files)"
+           id="file"
+           multiple="true"
+           type="file">
+  </div>
+  <div>
+    <button color="primary" mat-raised-button type="submit">Send reply</button>
+  </div>
+</form>
