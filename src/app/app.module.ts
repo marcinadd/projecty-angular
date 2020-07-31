@@ -64,6 +64,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ImportanceComponent} from './components/task/importance/importance.component';
 import {TruncatePipe} from './pipes/truncate.pipe';
 import {ReplyToMessageComponent} from './components/message/view-message/reply-to-message/reply-to-message.component';
+import {SingleMessageComponent} from './components/message/view-message/single-message/single-message.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import {ReplyToMessageComponent} from './components/message/view-message/reply-t
     ImportanceComponent,
     TruncatePipe,
     ReplyToMessageComponent,
+    SingleMessageComponent,
   ],
   imports: [
     BrowserModule,

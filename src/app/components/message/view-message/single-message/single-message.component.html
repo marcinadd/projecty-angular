@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-content></mat-card-content>
+  <p><b>From: </b>{{message.sender.username}}</p>
+  <p><b>To: </b>{{message.recipient.username}}</p>
+  <p><b>Date: </b>{{message.sendDate | date:'dd.MM.yyyy HH:mm:SS'}}</p>
+  <p><b>Text: </b>{{message.text}}</p>
+  <div *ngIf="message.reply !== null">
+    <app-single-message [message]="message.reply"></app-single-message>
+  </div>
+  <div *ngIf="message.reply === null && message.sender.username !== getCurrentUserUsername()">
+    <app-reply-to-message [replyTo]="message"></app-reply-to-message>
+  </div>
+</mat-card>

@@ -4,23 +4,14 @@
   </button>
 </div>
 <div class="my-4">
-  <p><b>From: </b>{{message.sender.username}}</p>
-  <p><b>To: </b>{{message.recipient.username}}</p>
-  <p><b>Date: </b>{{message.sendDate | date:'dd.MM.yyyy HH:mm:SS'}}</p>
-  <span class="border">
-    <p>
-      <b>Text: </b>
-      <br>
-      {{message.text}}
-    </p>
-  </span>
-  <p><b>Attachments</b></p>
-  <mat-list role="list">
-    <mat-list-item (click)="onAttachmentDownload(attachment)" *ngFor="let attachment of message.attachments"
-                   role="listitem">
-      {{attachment.fileName}}
-    </mat-list-item>
-  </mat-list>
-  <p><b>Reply</b></p>
-  <app-reply-to-message [replyTo]="message"></app-reply-to-message>
+  <app-single-message [message]="message"></app-single-message>
+  <div *ngIf="message.attachments.length > 0">
+    <p><b>Attachments</b></p>
+    <mat-list role="list">
+      <mat-list-item (click)="onAttachmentDownload(attachment)" *ngFor="let attachment of message.attachments"
+                     role="listitem">
+        {{attachment.fileName}}
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>
