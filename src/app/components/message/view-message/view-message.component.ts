@@ -15,6 +15,7 @@ import {environment} from '../../../../environments/environment';
 export class ViewMessageComponent implements OnInit {
   messageId = Number(this.route.snapshot.paramMap.get('id'));
   message: Message;
+  invertedRepliesMessage: Message;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,15 +29,30 @@ export class ViewMessageComponent implements OnInit {
     this.messageService.getMessage(this.messageId).subscribe(message => {
       this.message = message;
       console.log(message);
+      this.invertedRepliesMessage = this.invertMessageReplies(message);
     }, () => {
       this.router.navigate(['messages']);
     });
   }
+
+  invertMessageReplies(msg: Message) {
+    const arr: Message[] = [];
+    arr.push(msg);
+    while (msg.replyTo !== null) {
+      arr.push(msg.replyTo);
+      msg = msg.replyTo;
+    }
+    const length = arr.length;
+    for (let i = 1; i < length; i++) {
+      arr[i].reply = arr[i - 1];
+    }
+    return arr[length - 1];
+  }
+
 
   onAttachmentDownload(attachment: Attachment) {
     this.fileService.getFileAsBlob(environment.apiUrl + '/attachments/' + attachment.id).subscribe(data => {
       saveAs(data, attachment.fileName);
     });
   }
-
 }

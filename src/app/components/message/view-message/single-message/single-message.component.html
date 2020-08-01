@@ -4,10 +4,10 @@
   <p><b>To: </b>{{message.recipient.username}}</p>
   <p><b>Date: </b>{{message.sendDate | date:'dd.MM.yyyy HH:mm:SS'}}</p>
   <p><b>Text: </b>{{message.text}}</p>
-  <div *ngIf="message.reply !== null">
+  <div *ngIf="message.reply !== undefined">
     <app-single-message [message]="message.reply"></app-single-message>
   </div>
-  <div *ngIf="message.reply === null && message.sender.username !== getCurrentUserUsername()">
-    <app-reply-to-message [replyTo]="message"></app-reply-to-message>
+  <div *ngIf="message.reply === undefined && message.sender.username !== getCurrentUserUsername()">
+    <app-reply-to-message (replySent)="onReplySent($event)" [replyTo]="message"></app-reply-to-message>
   </div>
 </mat-card>

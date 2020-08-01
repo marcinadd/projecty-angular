@@ -4,7 +4,7 @@
   </button>
 </div>
 <div class="my-4">
-  <app-single-message [message]="message"></app-single-message>
+  <app-single-message [message]="invertedRepliesMessage"></app-single-message>
   <div *ngIf="message.attachments.length > 0">
     <p><b>Attachments</b></p>
     <mat-list role="list">

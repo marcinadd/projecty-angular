@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MessageService} from '../../../../services/message.service';
 import {Router} from '@angular/router';
@@ -12,6 +12,7 @@ import {Message} from '../../../../models/Message';
 })
 export class ReplyToMessageComponent implements OnInit {
   @Input() replyTo: Message;
+  @Output() replySent = new EventEmitter<Message>();
   messageForm;
   attachments = [];
 
@@ -41,6 +42,7 @@ export class ReplyToMessageComponent implements OnInit {
     formData.append('text', this.messageForm.get('text').value);
     this.messageService.replyToMessage(this.replyTo.id, formData).subscribe(result => {
       this.notificationsService.success('Success', 'Reply sent!');
+      this.replySent.next(result);
     });
   }
 

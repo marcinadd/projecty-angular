@@ -10,5 +10,6 @@ export class Message {
   title: string;
   text: string;
   attachments: Attachment[];
-  reply: Message;
+  replyTo: Message;
+  reply: Message = null;
 }

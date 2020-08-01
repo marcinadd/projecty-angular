@@ -20,4 +20,8 @@ export class SingleMessageComponent implements OnInit {
     console.log(this.authService.getUsername());
     return this.authService.getUsername();
   }
+
+  onReplySent(reply: Message) {
+    this.message.reply = reply;
+  }
 }
