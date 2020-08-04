@@ -3,7 +3,17 @@
   <p><b>From: </b>{{message.sender.username}}</p>
   <p><b>To: </b>{{message.recipient.username}}</p>
   <p><b>Date: </b>{{message.sendDate | date:'dd.MM.yyyy HH:mm:SS'}}</p>
+  <p><b>Subject: </b>{{message.title}}</p>
   <p><b>Text: </b>{{message.text}}</p>
+  <div *ngIf="message.attachments.length > 0">
+    <p><b>Attachments</b></p>
+    <mat-list role="list">
+      <mat-list-item (click)="onAttachmentDownload(attachment)" *ngFor="let attachment of message.attachments"
+                     role="listitem" style="cursor: pointer">
+        {{attachment.fileName}}
+      </mat-list-item>
+    </mat-list>
+  </div>
   <div *ngIf="message.reply !== undefined">
     <app-single-message [message]="message.reply"></app-single-message>
   </div>

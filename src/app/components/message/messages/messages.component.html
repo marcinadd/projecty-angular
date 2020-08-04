@@ -3,11 +3,4 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<mat-tab-group>
-  <mat-tab label="Received">
-    <app-message-list [messageType]="messageType.RECEIVED"></app-message-list>
-  </mat-tab>
-  <mat-tab label="Sent">
-    <app-message-list [messageType]="messageType.SENT"></app-message-list>
-  </mat-tab>
-</mat-tab-group>
+<app-message-list [messageType]="messageType.ANY"></app-message-list>

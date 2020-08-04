@@ -27,7 +27,7 @@ export class ReplyToMessageComponent implements OnInit {
   ngOnInit(): void {
     this.messageForm = this.formBuilder.group({
       recipientUsername: '',
-      title: '',
+      title: 'Re: ' + this.replyTo.title,
       text: '',
     });
   }

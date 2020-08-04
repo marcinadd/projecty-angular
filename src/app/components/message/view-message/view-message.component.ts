@@ -2,10 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from '../../../services/message.service';
 import {Message} from '../../../models/Message';
-import {Attachment} from '../../../models/Attachment';
 import {FileService} from '../../../services/file.service';
-import {saveAs} from 'file-saver';
-import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-view-message',
@@ -47,12 +44,5 @@ export class ViewMessageComponent implements OnInit {
       arr[i].reply = arr[i - 1];
     }
     return arr[length - 1];
-  }
-
-
-  onAttachmentDownload(attachment: Attachment) {
-    this.fileService.getFileAsBlob(environment.apiUrl + '/attachments/' + attachment.id).subscribe(data => {
-      saveAs(data, attachment.fileName);
-    });
   }
 }
