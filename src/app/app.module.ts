@@ -65,6 +65,7 @@ import {ImportanceComponent} from './components/task/importance/importance.compo
 import {TruncatePipe} from './pipes/truncate.pipe';
 import {ReplyToMessageComponent} from './components/message/view-message/reply-to-message/reply-to-message.component';
 import {SingleMessageComponent} from './components/message/view-message/single-message/single-message.component';
+import { TaskDetailsDialogComponent } from './components/dashboard/dialog/task-details-dialog/task-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import {SingleMessageComponent} from './components/message/view-message/single-m
     TruncatePipe,
     ReplyToMessageComponent,
     SingleMessageComponent,
+    TaskDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

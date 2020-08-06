@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {FileService} from './file.service';
+import {User} from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,15 @@ export class UserService {
 
   getAvatar(username: string) {
     return this.fileService.getFileAsBlob(`${this.apiUserUrl}/${username}/avatar`);
+  }
+
+  loadAvatar(user: User) {
+    this.getAvatar(user.username).subscribe(blob => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        user.avatar = reader.result;
+      };
+    });
   }
 }

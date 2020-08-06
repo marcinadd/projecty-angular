@@ -1,0 +1,16 @@
+<div mat-dialog-title>{{taskData.task.name}}</div>
+<mat-dialog-content>
+  <p><b>Start date: </b>{{taskData.task.startDate|date}}</p>
+  <p><b>End date: </b>{{taskData.task.endDate|date}}</p>
+  <p><b>Project: </b>{{project.name}}</p>
+<h2>Assigned users</h2>
+<mat-list>
+  <mat-list-item *ngFor="let user of taskData.task.assignedUsers">
+    <img matListAvatar [src]="user.avatar !== undefined? user.avatar: defaultAvatarUrl" alt="...">
+    <h3 matLine> {{user.username}} </h3>
+  </mat-list-item>
+</mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close] mat-button>Close</button>
+</mat-dialog-actions>

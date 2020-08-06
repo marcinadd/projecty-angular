@@ -3,6 +3,9 @@ import {TaskService} from '../../services/task.service';
 import {Task} from '../../models/Task';
 import {TaskStatus} from '../../models/TaskStatus';
 import {DateHelper} from '../../helpers/date-helper';
+import {AddTeamComponent} from '../teams/dialog/add-team/add-team.component';
+import {MatDialog} from '@angular/material/dialog';
+import {TaskDetailsDialogComponent} from './dialog/task-details-dialog/task-details-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +18,8 @@ export class DashboardComponent implements OnInit {
   taskStatuses = TaskStatus;
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -58,6 +62,13 @@ export class DashboardComponent implements OnInit {
           break;
       }
       task.status = taskResponse.status;
+    });
+  }
+
+  openTaskDetailsDialog(task: Task) {
+    this.dialog.open(TaskDetailsDialogComponent, {
+      width: '500px',
+      data: task
     });
   }
 }

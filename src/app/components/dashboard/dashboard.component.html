@@ -7,7 +7,7 @@
         <div *ngIf="toDoTasks.length>0; else toDoElseBlock">
           <mat-list>
             <mat-list-item *ngFor="let task of toDoTasks | sortBy:'asc':'startDate'" class="task-column">
-              <h3 mat-line>{{task.name}}</h3>
+              <h3 mat-line (click)="openTaskDetailsDialog(task)">{{task.name}}</h3>
               <h3 *ngIf="task.dateDifferenceInDaysToStart <=0" class="text-warning" mat-line>
                 Should be started
                 <span [ngPlural]="task.dateDifferenceInDaysToStart">
@@ -46,7 +46,7 @@
         <div *ngIf="inProgressTasks.length >0; else inProgressElseBlock">
           <mat-list>
             <mat-list-item *ngFor="let task of inProgressTasks | sortBy:'asc':'startDate'" class="task-column">
-              <h3 mat-line>{{task.name}}</h3>
+              <h3 mat-line (click)="openTaskDetailsDialog(task)">{{task.name}}</h3>
               <h3 *ngIf="task.dateDifferenceInDaysToEnd <=0" class="text-warning" mat-line>
                 Should be finished
                 <span [ngPlural]="task.dateDifferenceInDaysToEnd">
