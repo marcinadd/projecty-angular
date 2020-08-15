@@ -46,4 +46,8 @@ export class ProjectService {
   getProjectRoleForCurrentUserByProjectId(projectId: number): Observable<ProjectRole> {
     return this.http.get<ProjectRole>(`${this.apiProjectsUrl}/${projectId}/projectRole`);
   }
+
+  getInvitations(): Observable<ProjectRole[]> {
+    return this.http.get<ProjectRole[]>(this.apiProjectsUrl + '/invitations');
+  }
 }

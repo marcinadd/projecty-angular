@@ -1,0 +1,10 @@
+<mat-list>
+  <div mat-subheader>Project Invitations</div>
+  <mat-list-item *ngFor="let invitation of projectRoleInvitations">
+    <mat-icon mat-list-icon>mail</mat-icon>
+    <div mat-line>{{invitation.project.name}}</div>
+    <button (click)="onAccept(invitation)" mat-icon-button>
+      <mat-icon class="mat-24">check</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
